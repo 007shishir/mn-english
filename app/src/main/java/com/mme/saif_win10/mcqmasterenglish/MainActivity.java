@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        if (!SessionManager.getInstance().hasSignIn())
-//            startActivity(new Intent(MainActivity.this, SignIn.class));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,23 +48,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mBtn_SignIn = findViewById(R.id.mBtn_SignIn);
-        mBtn_Bcs = findViewById(R.id.mBtn_Bcs);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
+        }
 
-        //onClick Event handler
-        mBtn_SignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SignIn.class);
-                startActivity(intent);
-            }
-        });
-        mBtn_Bcs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
 
     }
@@ -115,7 +102,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.mP_Policy) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new PrivacyPolicy()).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_share) {
 

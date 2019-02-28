@@ -94,7 +94,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Parts of Speech"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button9" />
@@ -108,7 +108,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Parts of Speech"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button19" />
@@ -122,7 +122,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Sentences &amp; Transformations"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button18" />
@@ -136,7 +136,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Corrections"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button17" />
@@ -150,7 +150,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Clauses"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button16" />
@@ -164,7 +164,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Idioms &amp; Phrases"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button12" />
@@ -178,7 +178,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Part One"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button11" />
@@ -192,7 +192,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Part Two"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button15" />
@@ -206,7 +206,7 @@
         android:background="@drawable/bcs_btn_option_d"
         android:text="Part Three"
         android:textAllCaps="false"
-        android:textColor="@color/upperImage"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button14" />
