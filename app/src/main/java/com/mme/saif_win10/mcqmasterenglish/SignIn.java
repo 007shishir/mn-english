@@ -1,6 +1,7 @@
 package com.mme.saif_win10.mcqmasterenglish;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,10 +28,10 @@ public class SignIn extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(SignIn.this, MainActivity.class);
-        startActivity(intent);
-        super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(SignIn.this, MainActivity.class);
+//        startActivity(intent);
+//        super.onBackPressed();
+//    }
 }

@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.mP_Policy) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new PrivacyPolicy()).addToBackStack(null).commit();
+                    new PrivacyPolicy()).commit();
 
         } else if (id == R.id.nav_share) {
 
@@ -116,4 +116,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

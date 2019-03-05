@@ -86,7 +86,7 @@
         app:layout_constraintStart_toEndOf="@+id/button9" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/mBcs_Pos"
         android:layout_width="133dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
@@ -167,7 +167,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button12" />
+        app:layout_constraintTop_toBottomOf="@+id/mBcs_Pos" />
 
     <Button
         android:id="@+id/button15"

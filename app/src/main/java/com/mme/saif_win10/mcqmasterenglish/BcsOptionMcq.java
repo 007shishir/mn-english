@@ -1,0 +1,94 @@
+package com.mme.saif_win10.mcqmasterenglish;
+
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class BcsOptionMcq extends Fragment {
+    private RecyclerView mRecycler_BcsMcq;
+    private DatabaseReference mDatabase;
+    private View v;
+
+
+    public BcsOptionMcq() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_bcs_option_mcq, container, false);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("bcs_evs");
+        mDatabase.keepSynced(false);
+        mRecycler_BcsMcq = v.findViewById(R.id.mRecycler_BcsMcq);
+        mRecycler_BcsMcq.setHasFixedSize(true);
+        mRecycler_BcsMcq.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseRecyclerAdapter<Parameter, ParameterViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Parameter, ParameterViewHolder>
+                        (Parameter.class, R.layout.recycler_view_for_mcq, ParameterViewHolder.class, mDatabase) {
+            @Override
+            protected void populateViewHolder(ParameterViewHolder viewHolder, Parameter model, int position) {
+                final String post_key = getRef(position).getKey();
+                viewHolder.setSource(model.getSource());
+                viewHolder.setTopic(model.getTopic());
+                viewHolder.setSum(model.getSum());
+                viewHolder.setTotal(model.getTotal());
+
+            }
+        };
+        mRecycler_BcsMcq.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class ParameterViewHolder extends RecyclerView.ViewHolder
+    {
+        View mView;
+        public ParameterViewHolder(View itemView)
+        {
+            super(itemView);
+            mView = itemView;
+        }
+        public void setSource(String source)
+        {
+            TextView post_source = mView.findViewById(R.id.mTxt_source);
+            post_source.setText(source);
+        }
+        public void setTopic(String topic)
+        {
+            TextView post_topic = mView.findViewById(R.id.mTxt_topic);
+            post_topic.setText(topic);
+        }
+        public void setSum(String sum)
+        {
+            TextView post_sum = mView.findViewById(R.id.mTxt_sum);
+            post_sum.setText(sum);
+        }
+        public void setTotal(String total)
+        {
+            TextView post_total = mView.findViewById(R.id.mTxt_total);
+            post_total.setText(total);
+        }
+    }
+}
