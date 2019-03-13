@@ -1,18 +1,23 @@
 package com.mme.saif_win10.mcqmasterenglish;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion1;
 
 
 /**
@@ -27,7 +32,6 @@ public class BcsOptionMcq extends Fragment {
     public BcsOptionMcq() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +60,16 @@ public class BcsOptionMcq extends Fragment {
                 viewHolder.setTopic(model.getTopic());
                 viewHolder.setSum(model.getSum());
                 viewHolder.setTotal(model.getTotal());
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), McqVersion1.class);
+                        intent.putExtra("key_name", post_key);
+                        intent.putExtra("childName", "bcs_evs");
+                        Toast.makeText(getContext(), "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+                    }
+                });
 
             }
         };

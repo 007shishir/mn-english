@@ -3,6 +3,7 @@
     package="com.mme.saif_win10.mcqmasterenglish">
 
     <application
+        android:name=".MCQMasterEnglish"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +24,8 @@
         <activity android:name=".SignUp" />
         <activity
             android:name=".BcsOptionRecyclerV"
-            android:label="@string/title_activity_bcs_option_recycler_v"></activity>
+            android:label="@string/title_activity_bcs_option_recycler_v"/>
+        <activity android:name=".mcqROOMdatabase.McqVersion1"/>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.mme.saif_win10.mcqmasterenglish;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,9 +10,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mme.saif_win10.mcqmasterenglish.abstructClasses.Mcq_Database;
+
 public class BcsOptionRecyclerV extends AppCompatActivity {
 
     private TextView mTextMessage;
+    public static Mcq_Database mcq_database;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,6 +51,9 @@ public class BcsOptionRecyclerV extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bcs_option_recycler_v);
+
+        //accessing mcq database directly, which is not good practice
+        mcq_database = Room.databaseBuilder(getApplicationContext(), Mcq_Database.class, "McqDb").allowMainThreadQueries().build();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
