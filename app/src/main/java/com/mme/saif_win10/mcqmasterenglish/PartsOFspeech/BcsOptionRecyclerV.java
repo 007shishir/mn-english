@@ -1,7 +1,6 @@
-package com.mme.saif_win10.mcqmasterenglish;
+package com.mme.saif_win10.mcqmasterenglish.PartsOFspeech;
 
 import android.arch.persistence.room.Room;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,7 +9,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.resourceFragment.PosNoun;
+import com.mme.saif_win10.mcqmasterenglish.R;
 import com.mme.saif_win10.mcqmasterenglish.abstructClasses.Mcq_Database;
+import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqFragmentOne;
 
 public class BcsOptionRecyclerV extends AppCompatActivity {
 
@@ -24,13 +26,6 @@ public class BcsOptionRecyclerV extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_mcq:
-
-//                     before adding any fragments to details_screen just checking if already fragment is presented then popping it and then will add the new fragment.
-//                    if (getSupportFragmentManager().findFragmentById(R.id.mFL_bcsOR) != null) {
-//                        Toast.makeText(getApplicationContext(), "framelayout is not null", Toast.LENGTH_SHORT).show();
-//                        getSupportFragmentManager().popBackStack();
-//                    }
-
                     getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
                             new BcsOptionMcq()).commit();
                     return true;
@@ -39,8 +34,21 @@ public class BcsOptionRecyclerV extends AppCompatActivity {
                             new BcsOptionMemorize()).commit();
                     return true;
                 case R.id.navigation_resource:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
-                            new BcsOptionResource()).commit();
+//                     before adding any fragments to details_screen just checking if already fragment is presented then popping it and then will add the new fragment.
+//                    if (getSupportFragmentManager().findFragmentById(R.id.mFL_bcsOR) != null) {
+//                        Toast.makeText(getApplicationContext(), "framelayout is not null", Toast.LENGTH_SHORT).show();
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
+//                                new BcsOptionResource()).commit();
+////                        getSupportFragmentManager().popBackStack();
+//                    }
+                    if (getSupportFragmentManager().findFragmentById(R.id.mFL_bcsOR) instanceof PosNoun){
+                        Toast.makeText(getApplicationContext(), "filled with PosNoun", Toast.LENGTH_SHORT).show();
+                    }else {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
+                                new BcsOptionResource()).commit();
+                    }
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
+//                            new BcsOptionResource()).commit();
                     return true;
             }
             return false;
@@ -63,5 +71,4 @@ public class BcsOptionRecyclerV extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
 }

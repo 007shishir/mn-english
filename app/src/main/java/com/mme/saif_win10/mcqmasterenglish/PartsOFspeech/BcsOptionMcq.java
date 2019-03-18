@@ -1,4 +1,4 @@
-package com.mme.saif_win10.mcqmasterenglish;
+package com.mme.saif_win10.mcqmasterenglish.PartsOFspeech;
 
 
 import android.content.Context;
@@ -17,6 +17,10 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mme.saif_win10.mcqmasterenglish.BcsOption;
+import com.mme.saif_win10.mcqmasterenglish.Parameter;
+import com.mme.saif_win10.mcqmasterenglish.R;
+import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqFragmentOne;
 import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion1;
 
 
@@ -24,10 +28,10 @@ import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion1;
  * A simple {@link Fragment} subclass.
  */
 public class BcsOptionMcq extends Fragment {
+
     private RecyclerView mRecycler_BcsMcq;
     private DatabaseReference mDatabase;
     private View v;
-
 
     public BcsOptionMcq() {
         // Required empty public constructor
@@ -63,6 +67,14 @@ public class BcsOptionMcq extends Fragment {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("key_name", post_key);
+//                        bundle.putString("childName", "bcs_evs");
+//                        FragmentTransaction fr = getFragmentManager().beginTransaction();
+//                        McqFragmentOne mcqFragmentOne = new McqFragmentOne();
+//                        mcqFragmentOne.setArguments(bundle);
+//                        fr.replace(R.id.mFL_bcsOR, new McqFragmentOne());
+//                        fr.addToBackStack(null).commit();
                         Intent intent = new Intent(getActivity(), McqVersion1.class);
                         intent.putExtra("key_name", post_key);
                         intent.putExtra("childName", "bcs_evs");

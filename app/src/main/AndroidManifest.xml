@@ -23,9 +23,13 @@
         <activity android:name=".SignIn" />
         <activity android:name=".SignUp" />
         <activity
-            android:name=".BcsOptionRecyclerV"
+            android:name=".PartsOFspeech.BcsOptionRecyclerV"
             android:label="@string/title_activity_bcs_option_recycler_v"/>
         <activity android:name=".mcqROOMdatabase.McqVersion1"/>
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
 
 </manifest>
