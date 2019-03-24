@@ -1,8 +1,10 @@
 package com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +17,6 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-//import com.google.android.gms.ads.AdRequest;
-//import com.google.android.gms.ads.AdView;
-//import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.MobileAds;
 import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.BcsPOSoptionRecV;
 import com.mme.saif_win10.mcqmasterenglish.R;
@@ -25,9 +24,13 @@ import com.mme.saif_win10.mcqmasterenglish.R;
 import java.util.List;
 import java.util.Objects;
 
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
+//import com.google.android.gms.ads.MobileAds;
+
 //import io.github.kexanie.library.MathView;
 
-public class McqVersion1 extends AppCompatActivity {
+public class McqVersion2 extends AppCompatActivity {
 
     //geting mcq_viewmodel object
     private Mcq_ViewModel mcq_viewModel;
@@ -291,9 +294,9 @@ public class McqVersion1 extends AppCompatActivity {
         });
 
         final Firebase mQuestion = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/" + mQuestNum + "/q");
-        mQuestion.addValueEventListener(new com.firebase.client.ValueEventListener() {
+        mQuestion.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 String question = dataSnapshot.getValue(String.class);
                 mTxt_quest.setText(question);
                 //For database only
@@ -308,9 +311,9 @@ public class McqVersion1 extends AppCompatActivity {
 
         Firebase mChoice1 = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/" + mQuestNum + "/o1");
         //mChoice1.keepSynced(true);
-        mChoice1.addValueEventListener(new com.firebase.client.ValueEventListener() {
+        mChoice1.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 String option1 = dataSnapshot.getValue(String.class);
                 mChkOpt1.setText(option1);
                 //For Database only
@@ -325,9 +328,9 @@ public class McqVersion1 extends AppCompatActivity {
 
         Firebase mChoice2 = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/" + mQuestNum + "/o2");
         //mChoice2.keepSynced(true);
-        mChoice2.addValueEventListener(new com.firebase.client.ValueEventListener() {
+        mChoice2.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 String option2 = dataSnapshot.getValue(String.class);
                 mChkOpt2.setText(option2);
                 //For database only
@@ -342,9 +345,9 @@ public class McqVersion1 extends AppCompatActivity {
 
         Firebase mChoice3 = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/" + mQuestNum + "/o3");
         //mChoice3.keepSynced(true);
-        mChoice3.addValueEventListener(new com.firebase.client.ValueEventListener() {
+        mChoice3.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 String option3 = dataSnapshot.getValue(String.class);
                 mChkOpt3.setText(option3);
                 //For database only
@@ -359,9 +362,9 @@ public class McqVersion1 extends AppCompatActivity {
 
         Firebase mChoice4 = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/" + mQuestNum + "/o4");
         //mChoice4.keepSynced(true);
-        mChoice4.addValueEventListener(new com.firebase.client.ValueEventListener() {
+        mChoice4.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 String option4 = dataSnapshot.getValue(String.class);
                 mChkOpt4.setText(option4);
                 //For database only
@@ -431,9 +434,9 @@ public class McqVersion1 extends AppCompatActivity {
                 //https://mcq-master-english.firebaseio.com/bcs_evs/10058/1/ans
                 mAnswer = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/" + mQuestNum + "/ans");
                 //mAnswer.keepSynced(true);
-                mAnswer.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                mAnswer.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                         String answer = dataSnapshot.getValue(String.class);
 
                         //For database only
@@ -451,15 +454,9 @@ public class McqVersion1 extends AppCompatActivity {
                             answeredQn = mQuestNum - 1;
                             totalPoint++;
 
-                            if (level_offline == 0){
-                                level = levelINCREASE(level);
-                                //For room database use only
-                                level_cards = level;
-                            }else {
-                                level = levelINCREASE(level_offline);
-                                //For room database use only
-                                level_cards = level;
-                            }
+                            level = levelINCREASE(level);
+                            //For room database use only
+                            level_cards = level;
 
                             //updateLevelStatus(level);
                             eachQuestStatusSUCCESS();
@@ -477,15 +474,10 @@ public class McqVersion1 extends AppCompatActivity {
                             mTxt_ans.setText(showResult);
                             unAnsweredQN = mQuestNum - 1;
                             eachQuestStatusFAILURE();
-                            if (level_offline == 0){
-                                level = levelDECREASE(level);
-                                //For room database use only
-                                level_cards = level;
-                            }else {
-                                level = levelDECREASE(level_offline);
-                                //For room database use only
-                                level_cards = level;
-                            }
+                            level = levelDECREASE(level);
+
+                            //For room database use only
+                            level_cards = level;
 
                             //updateLevelStatus(level);
                             //idEachQuest(child_Name,mPost_key,questionN[unAnsweredQN]);
@@ -502,16 +494,11 @@ public class McqVersion1 extends AppCompatActivity {
                             initialState();
                             unAnsweredQN = mQuestNum - 1;
                             eachQuestStatusFAILURE();
+                            level = levelDECREASE(level);
 
-                            if (level_offline == 0){
-                                level = levelDECREASE(level);
-                                //For room database use only
-                                level_cards = level;
-                            }else {
-                                level = levelDECREASE(level_offline);
-                                //For room database use only
-                                level_cards = level;
-                            }
+                            //For room database use only
+                            level_cards = level;
+
 
                             //updateLevelStatus(level);
                             //idEachQuest(child_Name,mPost_key,questionN[unAnsweredQN]);
@@ -528,9 +515,9 @@ public class McqVersion1 extends AppCompatActivity {
 
                 mExplanation = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/" + mQuestNum + "/e");
                 //mExplanation.keepSynced(true);
-                mExplanation.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                mExplanation.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                         String explanation = dataSnapshot.getValue(String.class);
                         mTxt_expl.setText(explanation);
                         //For database only
@@ -1410,200 +1397,178 @@ public class McqVersion1 extends AppCompatActivity {
 
     public void readFromRoomDatabase() {
 
-
         String id = child_Name + "_" + mPost_key + "_" + questionN[mQuestNum - 1];
-        final List<Mcq_Q_entity> readQfromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(id);
 
-        if (readQfromDatabase.isEmpty()) {
-            updateQuestion();
-        }
-
-        if (!readQfromDatabase.isEmpty()) {
-            for (final Mcq_Q_entity mqe : readQfromDatabase) {
-
-                idEachQuest(child_Name, mPost_key, questionN[mQuestNum - 1]);
-
-                String get_q = mqe.getQ();
-                mTxt_quest.setText(get_q);
-                String get_o1 = mqe.getO1();
-                mChkOpt1.setText(get_o1);
-                String get_o2 = mqe.getO2();
-                mChkOpt2.setText(get_o2);
-                String get_o3 = mqe.getO3();
-                mChkOpt3.setText(get_o3);
-                String get_o4 = mqe.getO4();
-                mChkOpt4.setText(get_o4);
-
-
-                totalQuestion = mqe.getTotal_N_Q();
-                String special_id = child_Name + "_" + mPost_key + "_" + questionN[totalQuestion - 1];
-                List<Mcq_Q_entity> read_level_fromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(special_id);
-
-                if (read_level_fromDatabase.isEmpty()) {
-                    level_cards_offline = 0;
-                    updateLevelStatus(level_cards_offline);
+        mcq_viewModel = ViewModelProviders.of(this).get(Mcq_ViewModel.class);
+        mcq_viewModel.getSelect_row(id).observe(this, new Observer<List<Mcq_Q_entity>>() {
+            @Override
+            public void onChanged(@Nullable List<Mcq_Q_entity> mcq_q_entities) {
+                if (Objects.requireNonNull(mcq_q_entities).isEmpty()) {
+                    updateQuestion();
                 }
-                if (!read_level_fromDatabase.isEmpty()) {
-                    for (Mcq_Q_entity mqe_level : read_level_fromDatabase) {
-                        level_cards_offline = mqe_level.getLevel_cards();
-                        updateLevelStatus(level_cards_offline);
-                    }
-                }
+                if (!mcq_q_entities.isEmpty()) {
+                    for (final Mcq_Q_entity mqe : mcq_q_entities) {
 
-                //special only for this method
-                level_offline = level_cards_offline;
+                        idEachQuest(child_Name, mPost_key, questionN[mQuestNum - 1]);
 
-                initialState_offline();
-
-                //For firebase use only
-                q = get_q;
-                o1 = get_o1;
-                o2 = get_o2;
-                o3 = get_o3;
-                o4 = get_o4;
-                total_N_Q = totalQuestion;
-
-                //Toast.makeText(getApplicationContext(), get_q + "\n" + get_o1 + "\n" + get_o2 + "\n" + get_o3 + "\n" + get_o4, Toast.LENGTH_SHORT).show();
-
-                //selecting next previous and refresh
-                next_previous_refresh_forRoomDatabase();
+                        String get_q = mqe.getQ();
+                        mTxt_quest.setText(get_q);
+                        String get_o1 = mqe.getO1();
+                        mChkOpt1.setText(get_o1);
+                        String get_o2 = mqe.getO2();
+                        mChkOpt2.setText(get_o2);
+                        String get_o3 = mqe.getO3();
+                        mChkOpt3.setText(get_o3);
+                        String get_o4 = mqe.getO4();
+                        mChkOpt4.setText(get_o4);
 
 
-                mBtn_submit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                        totalQuestion = mqe.getTotal_N_Q();
+                        String special_id = child_Name + "_" + mPost_key + "_" + questionN[totalQuestion - 1];
+                        List<Mcq_Q_entity> read_level_fromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(special_id);
 
-                        String mNextQuest = "NEXT";
-                        mBtn_submit.setText(mNextQuest);
+                        if (read_level_fromDatabase.isEmpty()) {
+                            level_cards_offline = 0;
+                            updateLevelStatus(level_cards_offline);
+                        }
+                        if (!read_level_fromDatabase.isEmpty()) {
+                            for (Mcq_Q_entity mqe_level : read_level_fromDatabase) {
+                                level_cards_offline = mqe_level.getLevel_cards();
+                                updateLevelStatus(level_cards_offline);
+                            }
+                        }
+
+                        //special only for this method
+                        level_offline = level_cards_offline;
+
+                        initialState_offline();
+
+                        //For firebase use only
+                        q = get_q;
+                        o1 = get_o1;
+                        o2 = get_o2;
+                        o3 = get_o3;
+                        o4 = get_o4;
+                        total_N_Q = totalQuestion;
+
+                        //Toast.makeText(getApplicationContext(), get_q + "\n" + get_o1 + "\n" + get_o2 + "\n" + get_o3 + "\n" + get_o4, Toast.LENGTH_SHORT).show();
+
+                        //selecting next previous and refresh
+                        next_previous_refresh_forRoomDatabase();
+
+
                         mBtn_submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
-                                //Changing the text for submit, answer and explanation view
-                                String mSubmit = "SUBMIT";
-                                String mAnswer = "ANSWER";
-                                String mExplanation = "Explanation will be here";
-                                String mRightvWrong = "Check";
-
-                                //set Background color for RIGHT v WRONG indicator Text box
-                                mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_answer_background));
-
-                                mBtn_submit.setText(mSubmit);
-                                mTxt_ans.setText(mAnswer);
-                                mTxt_expl.setText(mExplanation);
-                                mTxt_RIGHTvWRONG.setText(mRightvWrong);
-
-                                //Increase the question number
-                                mQuestNum++;
-                                eachQuestStatus();
-                                initialState_offline();
-
-                                uncheckOption();
+                                String mNextQuest = "NEXT";
+                                mBtn_submit.setText(mNextQuest);
 
 
-                                if (mQuestNum > totalQuestion) {
-                                    mQuestNum = 1;
+                                mBtn_submit.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
 
-                                    make_int_r_zero();
-                                    notificationForTotalPoint();
-                                    eachQuestStatus();
-                                    readFromRoomDatabase();
+                                        //Here it does not work! Cant access this onClick Method
+                                        onCLICKonNEXT_offline();
 
-                                    cycle++;
-                                    totalPoint = 0;
+                                    }
+                                });
+
+
+                                checkOptionChoice();
+
+
+                                String get_ans = mqe.getAns();
+                                String get_e = mqe.getE();
+                                mTxt_ans.setText(get_ans);
+                                mTxt_expl.setText(get_e);
+
+                                //For Firebase use only
+                                ans = get_ans;
+                                e = get_e;
+
+                                if (ansChoice.equals(get_ans)) {
+                                    showResult = "Ans: " + get_ans;
+                                    mTxt_ans.setText(showResult);
+
+                                    mTxt_RIGHTvWRONG.setText("RIGHT!");
+                                    //Toast.makeText(McqQuestion.this, "Correct", Toast.LENGTH_SHORT).show();
+
+                                    //set Background color for RIGHT v WRONG indicator Text box
+                                    mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_question_status_green));
+
+                                    answeredQn = mQuestNum - 1;
+                                    //eachQuestStatusSUCCESS() is replaced with stopRepeatMarkCountSUCCESS() to stop repeat count
+                                    //eachQuestStatusSUCCESS();
+                                    stopRepeatMarkCountSUCCESS();
+
+                                    level_offline = levelINCREASE_offline(level_offline);
+                                    //For room database use only
+                                    level_cards = level_offline;
+
                                     initialState_offline();
+                                    addQuestionDatabase();
+
+                                } else if (ansChoice.equals("NoAnswerChoosen")) {
+                                    initialState_offline();
+                                    showResult = "Ans: " + get_ans;
+                                    mTxt_ans.setText(showResult);
+                                    mTxt_RIGHTvWRONG.setText("WRONG!");
+
+                                    //set Background color for RIGHT v WRONG indicator Text box
+                                    mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_question_status_background));
+
+                                    unAnsweredQN = mQuestNum - 1;
+
+                                    stopRepeatMarkCountFAILURE();
+                                    //eachQuestStatusFAILURE();
+
+                                    level_offline = levelDECREASE(level_offline);
+                                    //For room database use only
+                                    level_cards = level_offline;
+
+                                    addQuestionDatabase();
+
                                 } else {
+                                    showResult = "Ans: " + get_ans;
+                                    mTxt_ans.setText(showResult);
+                                    mTxt_RIGHTvWRONG.setText("WRONG!");
+                                    //Toast.makeText(McqQuestion.this, "Wrong Answer, Question No.: " + questionN[unAnsweredQN], Toast.LENGTH_SHORT).show();
 
-                                    readFromRoomDatabase();
+                                    //set Background color for RIGHT v WRONG indicator Text box
+                                    mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_question_status_background));
+
+                                    initialState_offline();
+                                    unAnsweredQN = mQuestNum - 1;
+
+                                    stopRepeatMarkCountFAILURE();
+                                    //eachQuestStatusFAILURE();
+
+                                    level_offline = levelDECREASE(level_offline);
+
+                                    //For room database use only
+                                    level_cards = level_offline;
+                                    addQuestionDatabase();
                                 }
-
                             }
                         });
 
-
-                        checkOptionChoice();
-
-
-                        String get_ans = mqe.getAns();
-                        String get_e = mqe.getE();
-                        mTxt_ans.setText(get_ans);
-                        mTxt_expl.setText(get_e);
-
-                        //For Firebase use only
-                        ans = get_ans;
-                        e = get_e;
-
-                        if (ansChoice.equals(get_ans)) {
-                            showResult = "Ans: " + get_ans;
-                            mTxt_ans.setText(showResult);
-
-                            mTxt_RIGHTvWRONG.setText("RIGHT!");
-                            //Toast.makeText(McqQuestion.this, "Correct", Toast.LENGTH_SHORT).show();
-
-                            //set Background color for RIGHT v WRONG indicator Text box
-                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_question_status_green));
-
-                            answeredQn = mQuestNum - 1;
-                            //eachQuestStatusSUCCESS() is replaced with stopRepeatMarkCountSUCCESS() to stop repeat count
-                            //eachQuestStatusSUCCESS();
-                            stopRepeatMarkCountSUCCESS();
-
-                            level_offline = levelINCREASE_offline(level_offline);
-                            //For room database use only
-                            level_cards = level_offline;
-
-                            initialState_offline();
-                            addQuestionDatabase();
-
-                        } else if (ansChoice.equals("NoAnswerChoosen")) {
-                            initialState_offline();
-                            showResult = "Ans: " + get_ans;
-                            mTxt_ans.setText(showResult);
-                            mTxt_RIGHTvWRONG.setText("WRONG!");
-
-                            //set Background color for RIGHT v WRONG indicator Text box
-                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_question_status_background));
-
-                            unAnsweredQN = mQuestNum - 1;
-
-                            stopRepeatMarkCountFAILURE();
-                            //eachQuestStatusFAILURE();
-
-                            level_offline = levelDECREASE(level_offline);
-                            //For room database use only
-                            level_cards = level_offline;
-
-                            addQuestionDatabase();
-
-                        } else {
-                            showResult = "Ans: " + get_ans;
-                            mTxt_ans.setText(showResult);
-                            mTxt_RIGHTvWRONG.setText("WRONG!");
-                            //Toast.makeText(McqQuestion.this, "Wrong Answer, Question No.: " + questionN[unAnsweredQN], Toast.LENGTH_SHORT).show();
-
-                            //set Background color for RIGHT v WRONG indicator Text box
-                            mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_question_status_background));
-
-                            initialState_offline();
-                            unAnsweredQN = mQuestNum - 1;
-
-                            stopRepeatMarkCountFAILURE();
-                            //eachQuestStatusFAILURE();
-
-                            level_offline = levelDECREASE(level_offline);
-
-                            //For room database use only
-                            level_cards = level_offline;
-
-                            addQuestionDatabase();
-                        }
-
                     }
-                });
-
+                }
             }
-
-        }
+        });
+//        final List<Mcq_Q_entity> readQfromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(id);
+//
+//        if (readQfromDatabase.isEmpty()) {
+//            updateQuestion();
+//        }
+//
+//        if (!readQfromDatabase.isEmpty()) {
+//            for (final Mcq_Q_entity mqe : readQfromDatabase) {
+//
+//            }
+//
+//        }
 
 
     }
@@ -1671,8 +1636,6 @@ public class McqVersion1 extends AppCompatActivity {
                 mTxt_ans.setText(mAnswer);
                 mTxt_expl.setText(mExplanation);
                 mTxt_RIGHTvWRONG.setText(chooseAnswer);
-                //set Background color for RIGHT v WRONG indicator Text box
-                mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_answer_background));
 
                 updateQuestion();
             }
@@ -1701,6 +1664,8 @@ public class McqVersion1 extends AppCompatActivity {
         String mExplanation = "Explanation will be here";
         String mRightvWrong = "Check";
 
+
+        Toast.makeText(getApplicationContext(), "inside NEXT", Toast.LENGTH_SHORT).show();
         //set Background color for RIGHT v WRONG indicator Text box
         mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_answer_background));
 
@@ -1713,18 +1678,23 @@ public class McqVersion1 extends AppCompatActivity {
         mQuestNum++;
         eachQuestStatus();
         initialState_offline();
+
         uncheckOption();
+
 
         if (mQuestNum > totalQuestion) {
             mQuestNum = 1;
+
             make_int_r_zero();
             notificationForTotalPoint();
             eachQuestStatus();
             readFromRoomDatabase();
+
             cycle++;
             totalPoint = 0;
             initialState_offline();
         } else {
+
             readFromRoomDatabase();
         }
 
@@ -1764,14 +1734,9 @@ public class McqVersion1 extends AppCompatActivity {
         String mSubmit = "SUBMIT";
         String mAnswer = "ANSWER";
         String mExplanation = "Explanation will be here";
-        String mRightvWrong = "Check";
-
-        //set Background color for RIGHT v WRONG indicator Text box
-        mTxt_RIGHTvWRONG.setBackground(getResources().getDrawable(R.drawable.mcq_answer_background));
         mBtn_submit.setText(mSubmit);
         mTxt_ans.setText(mAnswer);
         mTxt_expl.setText(mExplanation);
-        mTxt_RIGHTvWRONG.setText(mRightvWrong);
 
         //Increase the question number
 
@@ -1806,9 +1771,9 @@ public class McqVersion1 extends AppCompatActivity {
 
     public void notificationForTotalPoint() {
         if (totalPoint == totalQuestion) {
-            Toast.makeText(McqVersion1.this, "Congratulation, you got the highest mark!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(McqVersion2.this, "Congratulation, you got the highest mark!", Toast.LENGTH_SHORT).show();
         } else
-            Toast.makeText(McqVersion1.this, "Total Point: " + totalPoint, Toast.LENGTH_LONG).show();
+            Toast.makeText(McqVersion2.this, "Total Point: " + totalPoint, Toast.LENGTH_LONG).show();
     }
 
     public void commonLevelStatus() {
@@ -1836,7 +1801,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r1 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q2":
@@ -1846,7 +1811,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r2 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q3":
@@ -1856,7 +1821,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r3 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q4":
@@ -1866,7 +1831,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r4 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q5":
@@ -1876,7 +1841,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r5 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q6":
@@ -1886,7 +1851,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r6 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q7":
@@ -1896,7 +1861,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r7 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q8":
@@ -1906,7 +1871,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r8 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q9":
@@ -1916,7 +1881,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r9 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q10":
@@ -1926,7 +1891,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r10 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q11":
@@ -1936,7 +1901,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r11 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q12":
@@ -1946,7 +1911,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r12 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q13":
@@ -1956,7 +1921,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r13 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q14":
@@ -1966,7 +1931,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r14 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q15":
@@ -1976,7 +1941,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r15 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q16":
@@ -1986,7 +1951,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r16 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q17":
@@ -1996,7 +1961,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r17 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q18":
@@ -2006,7 +1971,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r18 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q19":
@@ -2016,7 +1981,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r19 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q20":
@@ -2026,7 +1991,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r20 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q21":
@@ -2036,7 +2001,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r21 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q22":
@@ -2046,7 +2011,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r22 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q23":
@@ -2056,7 +2021,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r23 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q24":
@@ -2066,7 +2031,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r24 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q25":
@@ -2076,7 +2041,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r25 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q26":
@@ -2086,7 +2051,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r26 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q27":
@@ -2096,7 +2061,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r27 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q28":
@@ -2106,7 +2071,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r28 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q29":
@@ -2116,7 +2081,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r29 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q30":
@@ -2126,7 +2091,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r30 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q31":
@@ -2136,7 +2101,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r31 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q32":
@@ -2146,7 +2111,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r32 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q33":
@@ -2156,7 +2121,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r33 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q34":
@@ -2166,7 +2131,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r34 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q35":
@@ -2176,7 +2141,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r35 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q36":
@@ -2186,7 +2151,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r36 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q37":
@@ -2196,7 +2161,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r37 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q38":
@@ -2206,7 +2171,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r38 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q39":
@@ -2216,7 +2181,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r39 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q40":
@@ -2226,7 +2191,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r40 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -2240,7 +2205,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r1 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q2":
@@ -2249,7 +2214,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r2 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q3":
@@ -2258,7 +2223,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r3 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q4":
@@ -2267,7 +2232,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r4 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q5":
@@ -2276,7 +2241,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r5 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q6":
@@ -2285,7 +2250,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r6 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q7":
@@ -2294,7 +2259,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r7 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q8":
@@ -2303,7 +2268,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r8 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q9":
@@ -2312,7 +2277,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r9 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q10":
@@ -2321,7 +2286,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r10 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q11":
@@ -2330,7 +2295,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r11 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q12":
@@ -2339,7 +2304,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r12 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q13":
@@ -2348,7 +2313,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r13 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q14":
@@ -2357,7 +2322,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r14 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q15":
@@ -2366,7 +2331,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r15 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q16":
@@ -2375,7 +2340,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r16 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q17":
@@ -2384,7 +2349,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r17 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q18":
@@ -2393,7 +2358,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r18 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q19":
@@ -2402,7 +2367,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r19 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q20":
@@ -2411,7 +2376,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r20 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q21":
@@ -2420,7 +2385,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r21 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q22":
@@ -2429,7 +2394,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r22 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q23":
@@ -2438,7 +2403,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r23 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q24":
@@ -2447,7 +2412,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r24 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q25":
@@ -2456,7 +2421,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r25 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q26":
@@ -2465,7 +2430,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r26 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q27":
@@ -2474,7 +2439,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r27 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q28":
@@ -2483,7 +2448,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r28 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q29":
@@ -2492,7 +2457,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r29 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q30":
@@ -2501,7 +2466,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r30 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q31":
@@ -2510,7 +2475,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r31 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q32":
@@ -2519,7 +2484,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r32 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q33":
@@ -2528,7 +2493,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r33 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q34":
@@ -2537,7 +2502,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r34 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q35":
@@ -2546,7 +2511,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r35 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q36":
@@ -2555,7 +2520,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r36 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q37":
@@ -2564,7 +2529,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r37 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q38":
@@ -2573,7 +2538,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r38 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q39":
@@ -2582,7 +2547,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r39 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case "q40":
@@ -2591,7 +2556,7 @@ public class McqVersion1 extends AppCompatActivity {
                     break;
                 }
                 if (r40 == 1) {
-                    Toast.makeText(McqVersion1.this, "You already tried this question", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(McqVersion2.this, "You already tried this question", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -2639,18 +2604,20 @@ public class McqVersion1 extends AppCompatActivity {
         r39 = 0;
         r40 = 0;
     }
-    public void disableSUBMITnextPREV(){
+
+    public void disableSUBMITnextPREV() {
         mBtn_submit.setEnabled(false);
         btn_next.setEnabled(false);
         btn_prev.setEnabled(false);
     }
+
     public void enableSUBMITnextPREV() {
         mBtn_submit.setEnabled(true);
         btn_next.setEnabled(true);
         btn_prev.setEnabled(true);
     }
 
-    public void progreesBarBackgroundVISIBLE(){
+    public void progreesBarBackgroundVISIBLE() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -2664,7 +2631,7 @@ public class McqVersion1 extends AppCompatActivity {
         }).start();
     }
 
-    public void progressBarBackgroundGONE(){
+    public void progressBarBackgroundGONE() {
         new Thread(new Runnable() {
             @Override
             public void run() {

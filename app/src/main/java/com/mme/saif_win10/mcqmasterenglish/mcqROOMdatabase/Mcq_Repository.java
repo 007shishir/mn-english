@@ -12,21 +12,20 @@ public class Mcq_Repository {
 
     private Mcq_Q_Dao mcq_q_dao;
     private LiveData<List<Mcq_Q_entity>> select_row;
-    //private List<Mcq_Q_entity> find_quest_option;
+    //private List<Mcq_Q_entity> find_questioption;
 
     //to get the id, not sure if this works!
-    String get_id;
+//    String get_id;
 
 
     Mcq_Repository(Application application) {
         Mcq_Database db =Mcq_Database.getDatabase(application);
         mcq_q_dao = db.mcq_q_dao();
-        select_row = mcq_q_dao.select_row(get_id);
+//        select_row = mcq_q_dao.select_row(get_id);
     }
 
-    LiveData<List<Mcq_Q_entity>> select_row(String id)
-    {
-        get_id = id;
+    public LiveData<List<Mcq_Q_entity>> getSelect_row(String id) {
+        select_row = mcq_q_dao.select_row(id);
         return select_row;
     }
 
@@ -52,8 +51,4 @@ public class Mcq_Repository {
     }
 }
 
-//    public LiveData<List<Mcq_Q_entity>> getSelect_row(String id) {
-////        get_id = id;
-//        select_row = mcq_q_dao.select_row(id);
-//        return select_row;
-//    }
+

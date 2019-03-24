@@ -2,7 +2,6 @@ package com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase;
 
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,18 +12,16 @@ import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.ads.MobileAds;
-import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.BcsOptionRecyclerV;
+import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.BcsPOSoptionRecV;
 import com.mme.saif_win10.mcqmasterenglish.R;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -178,9 +175,9 @@ public class McqFragmentOne extends Fragment {
             case "bcs_bd":
                 mTxt_Header_topic.setText(getResources().getString(R.string.bangladesh));
                 break;
-            case "previous_y_q":
-                mTxt_Header_topic.setText(getResources().getString(R.string.previous_year_question));
-                break;
+//            case "previous_y_q":
+//                mTxt_Header_topic.setText(getResources().getString(R.string.previous_year_question));
+//                break;
             case "bcs_bvs":
                 mTxt_Header_topic.setText(getResources().getString(R.string.bvs));
                 break;
@@ -1413,7 +1410,7 @@ public class McqFragmentOne extends Fragment {
 
 
         String id = child_Name + "_" + mPost_key + "_" + questionN[mQuestNum - 1];
-        final List<Mcq_Q_entity> readQfromDatabase = BcsOptionRecyclerV.mcq_database.mcq_q_dao().find_quest_option(id);
+        final List<Mcq_Q_entity> readQfromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(id);
 
 
         if (readQfromDatabase.isEmpty()) {
@@ -1439,7 +1436,7 @@ public class McqFragmentOne extends Fragment {
 
                 totalQuestion = mqe.getTotal_N_Q();
                 String special_id = child_Name + "_" + mPost_key + "_" + questionN[totalQuestion - 1];
-                List<Mcq_Q_entity> read_level_fromDatabase = BcsOptionRecyclerV.mcq_database.mcq_q_dao().find_quest_option(special_id);
+                List<Mcq_Q_entity> read_level_fromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(special_id);
 
                 if (read_level_fromDatabase.isEmpty()) {
                     level_cards_offline = 0;
@@ -1775,7 +1772,7 @@ public class McqFragmentOne extends Fragment {
 
     public void commonLevelStatus() {
         String extra_id = child_Name + "_" + mPost_key + "_" + questionN[totalQuestion - 1];
-        List<Mcq_Q_entity> read_level_fromDatabase = BcsOptionRecyclerV.mcq_database.mcq_q_dao().find_quest_option(extra_id);
+        List<Mcq_Q_entity> read_level_fromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(extra_id);
 
         if (read_level_fromDatabase.isEmpty()) {
             level_cards_offline = 0;

@@ -36,7 +36,8 @@
     <string name="eng_vocab">English Vocabulary</string>
     <string name="pyq">Previous Year Question</string>
     <string name="bcs">বিসিএস</string>
-    <string name="previous_year_question">বিগত সালের প্রশ্ন</string>
+
+    <string name="idiomsAnsPhrase">Idioms &amp; Phrases</string>
     <string name="current_world_int">সাম্প্রতিক বিশ্ব - আন্তর্জাতিক</string>
     <string name="current_world">সাম্প্রতিক বিশ্ব</string>
     <string name="bd">বাংলাদেশ</string>
@@ -48,4 +49,6 @@
     <string name="bangla">Bangla</string>
     <string name="bangla_grammar">Bangla Grammar</string>
     <string name="vocabulary">Vocabulary</string>
+    <string name="title_activity_memorize_version1">MemorizeVersion1</string>
+    <string name="title_activity_bcs_memorize_rec_v">BcsMemorizeRecV</string>
 </resources>

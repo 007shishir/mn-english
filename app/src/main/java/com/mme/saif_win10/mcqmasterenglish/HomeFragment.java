@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.BcsPOSoptionRecV;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,9 +47,11 @@ public class HomeFragment extends Fragment {
         mBtn_Bcs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container, new BcsOption());
-                fr.addToBackStack(null).commit();
+//                FragmentTransaction fr = getFragmentManager().beginTransaction();
+//                fr.replace(R.id.fragment_container, new BcsOption());
+//                fr.addToBackStack(null).commit();
+                Intent intent = new Intent(getActivity(), BcsPOSoptionRecV.class);
+                startActivity(intent);
             }
         });
         return view;

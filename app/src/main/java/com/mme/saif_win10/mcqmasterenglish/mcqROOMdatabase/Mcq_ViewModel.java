@@ -13,19 +13,26 @@ public class Mcq_ViewModel extends AndroidViewModel {
     //private List<Mcq_Q_entity> find_quest_option;
 
     //Not sure if this works
-    String get_id;
+//    String get_id;
 
     public Mcq_ViewModel(Application application) {
         super(application);
         mcq_repository = new Mcq_Repository(application);
-        select_row = mcq_repository.select_row(get_id);
+//        select_row = mcq_repository.select_row(get_id);
     }
+//
+//    LiveData<List<Mcq_Q_entity>> select_row(String id)
+//    {
+//        get_id = id;
+//        return select_row;
+//    }
 
-    LiveData<List<Mcq_Q_entity>> select_row(String id)
-    {
-        get_id = id;
+        public LiveData<List<Mcq_Q_entity>> getSelect_row(String id) {
+//        get_id = id;
+        select_row = mcq_repository.getSelect_row(id);
         return select_row;
     }
+
 
     public void addMcq_q (Mcq_Q_entity entity)
     {
@@ -33,8 +40,3 @@ public class Mcq_ViewModel extends AndroidViewModel {
     }
 }
 
-//    public LiveData<List<Mcq_Q_entity>> getSelect_row(String id) {
-////        get_id = id;
-//        select_row = mcq_repository.getSelect_row(id);
-//        return select_row;
-//    }

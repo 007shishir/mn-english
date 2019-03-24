@@ -153,10 +153,10 @@
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button16" />
+        app:layout_constraintTop_toBottomOf="@+id/mBcs_IP" />
 
     <Button
-        android:id="@+id/button16"
+        android:id="@+id/mBcs_IP"
         android:layout_width="133dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"

@@ -1,11 +1,9 @@
-package com.mme.saif_win10.mcqmasterenglish.PartsOFspeech;
+package com.mme.saif_win10.mcqmasterenglish.Idioms_Phrase;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,38 +15,37 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mme.saif_win10.mcqmasterenglish.BcsOption;
 import com.mme.saif_win10.mcqmasterenglish.Parameter;
 import com.mme.saif_win10.mcqmasterenglish.R;
-import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqFragmentOne;
 import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion1;
-
+import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion2;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BcsOptionMcq extends Fragment {
-
+public class Bcs_IP_optionMcq extends Fragment {
+    View rootView;
     private RecyclerView mRecycler_BcsMcq;
     private DatabaseReference mDatabase;
-    private View v;
 
-    public BcsOptionMcq() {
+
+    public Bcs_IP_optionMcq() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_bcs_option_mcq, container, false);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("bcs_evs");
+//        rootView = inflater.inflate(R.layout.fragment_bcs_memorize_mcq_opton, container, false);
+        rootView = inflater.inflate(R.layout.fragment_bcs_option_mcq, container, false);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("bcs_idioms_phrases");
         mDatabase.keepSynced(false);
-        mRecycler_BcsMcq = v.findViewById(R.id.mRecycler_BcsMcq);
+        mRecycler_BcsMcq = rootView.findViewById(R.id.mRecycler_BcsMcq);
         mRecycler_BcsMcq.setHasFixedSize(true);
         mRecycler_BcsMcq.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        return v;
+        return rootView;
     }
 
     @Override
@@ -57,34 +54,26 @@ public class BcsOptionMcq extends Fragment {
         FirebaseRecyclerAdapter<Parameter, ParameterViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Parameter, ParameterViewHolder>
                         (Parameter.class, R.layout.recycler_view_for_mcq, ParameterViewHolder.class, mDatabase) {
-            @Override
-            protected void populateViewHolder(ParameterViewHolder viewHolder, Parameter model, int position) {
-                final String post_key = getRef(position).getKey();
-                viewHolder.setSource(model.getSource());
-                viewHolder.setTopic(model.getTopic());
-                viewHolder.setSum(model.getSum());
-                viewHolder.setTotal(model.getTotal());
-                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("key_name", post_key);
-//                        bundle.putString("childName", "bcs_evs");
-//                        FragmentTransaction fr = getFragmentManager().beginTransaction();
-//                        McqFragmentOne mcqFragmentOne = new McqFragmentOne();
-//                        mcqFragmentOne.setArguments(bundle);
-//                        fr.replace(R.id.mFL_bcsOR, new McqFragmentOne());
-//                        fr.addToBackStack(null).commit();
-                        Intent intent = new Intent(getActivity(), McqVersion1.class);
-                        intent.putExtra("key_name", post_key);
-                        intent.putExtra("childName", "bcs_evs");
-                        Toast.makeText(getContext(), "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
-                        startActivity(intent);
-                    }
-                });
+                    protected void populateViewHolder(ParameterViewHolder viewHolder, Parameter model, int position) {
+                        final String post_key = getRef(position).getKey();
+                        viewHolder.setSource(model.getSource());
+                        viewHolder.setTopic(model.getTopic());
+                        viewHolder.setSum(model.getSum());
+                        viewHolder.setTotal(model.getTotal());
+                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getActivity(), McqVersion1.class);
+                                intent.putExtra("key_name", post_key);
+                                intent.putExtra("childName", "bcs_idioms_phrases");
+                                Toast.makeText(getContext(), "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
+                                startActivity(intent);
+                            }
+                        });
 
-            }
-        };
+                    }
+                };
         mRecycler_BcsMcq.setAdapter(firebaseRecyclerAdapter);
     }
 
@@ -117,4 +106,5 @@ public class BcsOptionMcq extends Fragment {
             post_total.setText(total);
         }
     }
+
 }

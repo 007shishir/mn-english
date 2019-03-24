@@ -9,12 +9,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mme.saif_win10.mcqmasterenglish.BcsOption;
 import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.resourceFragment.PosNoun;
 import com.mme.saif_win10.mcqmasterenglish.R;
 import com.mme.saif_win10.mcqmasterenglish.abstructClasses.Mcq_Database;
-import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqFragmentOne;
 
-public class BcsOptionRecyclerV extends AppCompatActivity {
+public class BcsPOSoptionRecV extends AppCompatActivity {
 
     private TextView mTextMessage;
     public static Mcq_Database mcq_database;
@@ -27,11 +27,11 @@ public class BcsOptionRecyclerV extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_mcq:
                     getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
-                            new BcsOptionMcq()).commit();
+                            new BcsOption()).commit();
                     return true;
                 case R.id.navigation_memorize:
                     getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
-                            new BcsOptionMemorize()).commit();
+                            new BcsPOSmemorize()).commit();
                     return true;
                 case R.id.navigation_resource:
 //                     before adding any fragments to details_screen just checking if already fragment is presented then popping it and then will add the new fragment.
@@ -65,7 +65,7 @@ public class BcsOptionRecyclerV extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
-                    new BcsOptionMcq()).commit();
+                    new BcsOption()).commit();
         }
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

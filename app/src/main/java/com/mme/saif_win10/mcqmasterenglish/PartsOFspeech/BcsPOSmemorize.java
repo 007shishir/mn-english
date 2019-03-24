@@ -1,38 +1,33 @@
 package com.mme.saif_win10.mcqmasterenglish.PartsOFspeech;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mme.saif_win10.mcqmasterenglish.BcsOption;
 import com.mme.saif_win10.mcqmasterenglish.Parameter;
 import com.mme.saif_win10.mcqmasterenglish.R;
-import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqFragmentOne;
-import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion1;
+import com.mme.saif_win10.mcqmasterenglish.memorizeROOMdatabase.MemorizeVersion1;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BcsOptionMemorize extends Fragment {
+public class BcsPOSmemorize extends Fragment {
     View rootView;
     private RecyclerView mRecycler_BcsMemorize;
     private DatabaseReference mDatabase;
 
-    public BcsOptionMemorize() {
+    public BcsPOSmemorize() {
         // Required empty public constructor
     }
 
@@ -53,11 +48,11 @@ public class BcsOptionMemorize extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Parameter, BcsOptionMcq.ParameterViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<Parameter, BcsOptionMcq.ParameterViewHolder>
-                        (Parameter.class, R.layout.recycler_view_for_mcq, BcsOptionMcq.ParameterViewHolder.class, mDatabase) {
+        FirebaseRecyclerAdapter<Parameter, BcsPOSoptionMcq.ParameterViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Parameter, BcsPOSoptionMcq.ParameterViewHolder>
+                        (Parameter.class, R.layout.recycler_view_for_mcq, BcsPOSoptionMcq.ParameterViewHolder.class, mDatabase) {
                     @Override
-                    protected void populateViewHolder(BcsOptionMcq.ParameterViewHolder viewHolder, Parameter model, int position) {
+                    protected void populateViewHolder(BcsPOSoptionMcq.ParameterViewHolder viewHolder, Parameter model, int position) {
                         final String post_key = getRef(position).getKey();
                         viewHolder.setSource(model.getSource());
                         viewHolder.setTopic(model.getTopic());
@@ -66,11 +61,11 @@ public class BcsOptionMemorize extends Fragment {
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-//                                Intent intent = new Intent(getActivity(), McqVersion1.class);
-//                                intent.putExtra("key_name", post_key);
-//                                intent.putExtra("childName", "bcs_evs");
-//                                Toast.makeText(getContext(), "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
-//                                startActivity(intent);
+                                Intent intent = new Intent(getActivity(), MemorizeVersion1.class);
+                                intent.putExtra("key_name", post_key);
+                                intent.putExtra("childName", "bcs_pos_memorize");
+                                Toast.makeText(getContext(), "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
+                                startActivity(intent);
                             }
                         });
 
