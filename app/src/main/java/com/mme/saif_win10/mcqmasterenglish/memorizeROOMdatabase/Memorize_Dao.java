@@ -19,4 +19,13 @@ public interface Memorize_Dao {
 
     @Query("SELECT ID, Question, e1, e2, Level_of_Cards, Level_of_question, Total_No_Question, Total_No_Explanation FROM Memorize WHERE ID=:id LIMIT 1")
     List<Memorize_entity> select_question (String id);
+
+    @Query("SELECT COUNT(Level_of_question) FROM Memorize WHERE Level_of_question<2 AND ID LIKE :id")
+    int countPrimaryQuestion (String id);
+
+    @Query("SELECT COUNT(Level_of_question) FROM Memorize WHERE Level_of_question IN(2,3) AND ID LIKE :id")
+    int countLearning (String id);
+
+    @Query("SELECT COUNT(Level_of_question) FROM Memorize WHERE Level_of_question IN(4,6) AND ID LIKE :id")
+    int countMaster (String id);
 }

@@ -168,6 +168,7 @@
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
                     ads:adSize="SMART_BANNER"
                     ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -175,23 +176,64 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView36"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/memorize_lower_left"
-                    android:gravity="center"
-                    android:text="TextView" />
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView35"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/memorize_lower_right"
-                    android:gravity="center"
-                    android:text="TextView" />
+                    <TextView
+                        android:id="@+id/mPrimary_Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Primary Status"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressPrimary"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:progressBackgroundTint="@color/colorPrimaryDark"
+                        android:progressTint="@android:color/holo_red_dark" />
+
+                    <TextView
+                        android:id="@+id/mLearning_Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Learning Status"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressLearning"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:indeterminate="false"
+                        android:progressBackgroundTint="@color/colorPrimaryDark"
+                        android:progressTint="@android:color/holo_orange_light" />
+
+                    <TextView
+                        android:id="@+id/mMaster_Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Master Status"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressMaster"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:progressBackgroundTint="@color/colorPrimaryDark"
+                        android:progressTint="@android:color/holo_green_dark" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -241,19 +283,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

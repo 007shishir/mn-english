@@ -25,6 +25,10 @@ public class Memorize_Repository {
         return select_livedata;
     }
 
+    int getCountPrimaryQuestion(String id){
+        return memorize_dao.countPrimaryQuestion(id);
+    }
+
     public void addMemorizeQ(Memorize_entity memorize_entity){
         new insertAsyncTask(memorize_dao).execute(memorize_entity);
     }

@@ -1,5 +1,6 @@
 package com.mme.saif_win10.mcqmasterenglish.memorizeROOMdatabase;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,21 +25,22 @@ import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.Mcq_Q_entity;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemorizeVersion1 extends AppCompatActivity {
     Memorize_ViewModel viewModel;
     boolean clicked;
 
-    private ProgressBar progressBar2;
+    private ProgressBar progressBar2, progressPrimary, progressLearning, progressMaster;
     private Handler handler = new Handler();
 
     private String question, e1, e2, id;
     private String getQuestion, getE1, getE2;
     private int totalQ, totalE;
-    private int primaryCount, learningCount, masterCount, totalPoint;
+    private int totalPoint;
     private int answeredQn, unAnsweredQN;
     TextView mTxt_quest, mTxt_E1, mTxt_E2, mTxt_level, mTxt_id, mTxt_known, mTxt_unknown,
-            mTxt_PointEachQ, mTxt_Submit;
+            mTxt_PointEachQ, mTxt_Submit, mPrimary_Text, mLearning_Text, mMaster_Text;
     LinearLayout mL_explanation;
 
     String[] questionN = {"q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12",
@@ -84,9 +86,15 @@ public class MemorizeVersion1 extends AppCompatActivity {
         mTxt_PointEachQ = findViewById(R.id.mTxt_PointEachQ);
         mTxt_Submit = findViewById(R.id.mTxt_Submit);
 
+        mPrimary_Text = findViewById(R.id.mPrimary_Text);
+        mLearning_Text = findViewById(R.id.mLearning_Text);
+        mMaster_Text = findViewById(R.id.mMaster_Text);
         mL_explanation = findViewById(R.id.mL_explanation);
 
         progressBar2 = findViewById(R.id.progressBar2);
+        progressPrimary = findViewById(R.id.progressPrimary);
+        progressLearning = findViewById(R.id.progressLearning);
+        progressMaster = findViewById(R.id.progressMaster);
 
 
         mTxt_Submit.setVisibility(View.VISIBLE);
@@ -117,8 +125,11 @@ public class MemorizeVersion1 extends AppCompatActivity {
     public void readFromDatabase() {
         mTxt_Submit.setVisibility(View.VISIBLE);
         mL_explanation.setVisibility(View.GONE);
+        updateLevelStatus(level_cards);
         id = child_Name + "_" + mPost_key + "_" + questionN[mQuestNum - 1];
+        countPriLernMast();
         final List<Memorize_entity> readQfromDatabase = Memorize_database.getINSTANCE(getApplicationContext()).memorize_dao().select_question(id);
+
 
         if (readQfromDatabase.isEmpty()) {
 //            Toast.makeText(getApplicationContext(), "106: ", Toast.LENGTH_LONG).show();
@@ -170,6 +181,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
                 if (!read_level_fromDatabase.isEmpty()) {
                     for (Memorize_entity mr_level : read_level_fromDatabase) {
                         level_cards = mr_level.getLevel_cards();
+//                        Toast.makeText(getApplicationContext(), "101: "+level_cards, Toast.LENGTH_SHORT).show();
                         updateLevelStatus(level_cards);
                     }
                 }
@@ -184,10 +196,13 @@ public class MemorizeVersion1 extends AppCompatActivity {
                         mTxt_unknown.setVisibility(View.GONE);
                         answeredQn = mQuestNum - 1;
 
+                        stopRepeatMarkCountSUCCESS_DB();
+
                         level_cards = levelINCREASE(level_cards);
+//                        Toast.makeText(getApplicationContext(), String.valueOf(level_cards), Toast.LENGTH_SHORT).show();
                         updateLevelStatus(level_cards);
 //                        stopRepeatMarkCountSUCCESS();
-                        stopRepeatMarkCountSUCCESS_DB();
+
                         eachQuestStatus_DB();
 
                         addToDatabaseOFFLINE();
@@ -200,11 +215,12 @@ public class MemorizeVersion1 extends AppCompatActivity {
                         mQuestNum++;
                         if (mQuestNum > totalQ) {
                             mQuestNum = 1;
+                            totalPoint = 0;
                             make_int_r_zero();
                         }
 
                         mTxt_Submit.setVisibility(View.VISIBLE);
-//                        addToDatabase();
+                        countPriLernMast();
                         readFromDatabase();
                     }
                 });
@@ -235,9 +251,10 @@ public class MemorizeVersion1 extends AppCompatActivity {
 //                        Toast.makeText(getApplicationContext(), String.valueOf(mQuestNum), Toast.LENGTH_LONG).show();
                         if (mQuestNum > totalQ) {
                             mQuestNum = 1;
+                            totalPoint = 0;
                             make_int_r_zero();
                         }
-//                        addToDatabase();
+                        countPriLernMast();
                         readFromDatabase();
                     }
                 });
@@ -282,6 +299,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
 
     public void addToDatabaseOFFLINE(){
         id = child_Name + "_" + mPost_key + "_" + questionN[mQuestNum - 1];
+//        Toast.makeText(getApplicationContext(), questionN[mQuestNum - 1], Toast.LENGTH_SHORT).show();
         Memorize_entity memorize_entity = new Memorize_entity();
         memorize_entity.setId(id);
         memorize_entity.setQ(getQuestion);
@@ -400,7 +418,8 @@ public class MemorizeVersion1 extends AppCompatActivity {
     }
 
     public int levelINCREASE(int a) {
-        if (level_cards == totalQ) {
+//        Toast.makeText(getApplicationContext(), "103, totalPoint: "+totalPoint+"totalQ: "+totalQ, Toast.LENGTH_SHORT).show();
+        if (totalPoint == totalQ) {
             if (a < 2) {
                 a++;
                 return a;
@@ -2054,10 +2073,12 @@ public class MemorizeVersion1 extends AppCompatActivity {
 
     public void updateQuestion(){
         id = child_Name + "_" + mPost_key + "_" + questionN[mQuestNum - 1];
-
+        countPriLernMast();
         eachQuestStatus();
         idEachQuest(child_Name, mPost_key, questionN[mQuestNum - 1]);
-        
+
+        progreesBarBackgroundVISIBLE();
+
         Firebase mTotalQ = new Firebase("https://mcq-master-english.firebaseio.com/" + child_Name + "/" + mPost_key + "/info/totalQ");
         mTotalQ.addValueEventListener(new ValueEventListener() {
             @Override
@@ -2151,6 +2172,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
 
                 addToDatabase();
 
+                countPriLernMast();
                 String defaultE = "e";
                 String defaultEE = "ee";
                 mTxt_E1.setText(defaultE);
@@ -2187,6 +2209,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
 //                        e2 = getE2;
                 addToDatabase();
 
+                countPriLernMast();
                 String defaultE = "e";
                 String defaultEE = "ee";
                 mTxt_E1.setText(defaultE);
@@ -3647,6 +3670,46 @@ public class MemorizeVersion1 extends AppCompatActivity {
 
     public void eachQuestStatus_DB() {
         updateLevelEachQuestionStatus(level_question);
+    }
+
+    public void countPriLernMast (){
+
+        final String customID = child_Name + "_" + mPost_key + "_"+"%";
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int countPrimary = Memorize_database.getINSTANCE(getApplicationContext()).
+                                memorize_dao().countPrimaryQuestion(customID);
+                        int countLearning = Memorize_database.getINSTANCE(getApplicationContext()).
+                                memorize_dao().countLearning(customID);
+                        int countMaster = Memorize_database.getINSTANCE(getApplicationContext()).
+                                memorize_dao().countMaster(customID);
+//                        int countMaster = totalQ - countPrimary - countLearning;
+                        progressPrimary.setMax(totalQ);
+                        progressLearning.setMax(totalQ);
+                        progressMaster.setMax(totalQ);
+                        progressPrimary.setProgress(countPrimary);
+                        progressLearning.setProgress(countLearning);
+                        progressMaster.setProgress(countMaster);
+
+                        String textPr = "Primary: "+String.valueOf(countPrimary)+" (out of "+String.valueOf(totalQ)+")";
+                        String textLr = "Learning: "+String.valueOf(countLearning)+" (out of "+String.valueOf(totalQ)+")";
+                        String textMs = "Master: "+String.valueOf(countMaster)+" (out of "+String.valueOf(totalQ)+")";
+
+                        mPrimary_Text.setText(textPr);
+                        mLearning_Text.setText(textLr);
+                        mMaster_Text.setText(textMs);
+
+                    }
+                });
+            }
+        }).start();
+
+
     }
 
 
