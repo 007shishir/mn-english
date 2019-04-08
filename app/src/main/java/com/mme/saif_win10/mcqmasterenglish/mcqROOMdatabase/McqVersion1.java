@@ -1,9 +1,11 @@
 package com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,6 +23,8 @@ import com.firebase.client.ValueEventListener;
 import com.google.android.gms.ads.MobileAds;
 import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.BcsPOSoptionRecV;
 import com.mme.saif_win10.mcqmasterenglish.R;
+import com.mme.saif_win10.mcqmasterenglish.abstructClasses.Mcq_Database;
+import com.mme.saif_win10.mcqmasterenglish.abstructClasses.Memorize_database;
 
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +35,7 @@ public class McqVersion1 extends AppCompatActivity {
 
     //geting mcq_viewmodel object
     private Mcq_ViewModel mcq_viewModel;
-    private ProgressBar progressBar2;
+    private ProgressBar progressBar2, progressPrimary, progressLearning, progressMaster;
     private Handler handler = new Handler();
 
 
@@ -73,6 +77,8 @@ public class McqVersion1 extends AppCompatActivity {
 
     int answeredQn = 0;
     int unAnsweredQN = 0;
+
+    private TextView mPrimary_Text, mLearning_Text, mMaster_Text;
 
     private TextView mTxt_quest;
     private CheckBox mChkOpt1;
@@ -128,6 +134,13 @@ public class McqVersion1 extends AppCompatActivity {
         mChkOpt4 = findViewById(R.id.mChkOpt4);
         mBtn_submit = findViewById(R.id.mBtn_submit);
         mTxt_id = findViewById(R.id.mTxt_ID);
+
+        mPrimary_Text = findViewById(R.id.mPrimary_Text);
+        mLearning_Text = findViewById(R.id.mLearning_Text);
+        mMaster_Text = findViewById(R.id.mMaster_Text);
+        progressPrimary = findViewById(R.id.progressPrimary);
+        progressLearning = findViewById(R.id.progressLearning);
+        progressMaster = findViewById(R.id.progressMaster);
 
         mTxt_totalQ = findViewById(R.id.mTxt_totalQ);
         mTxt_Qnumber = findViewById(R.id.mTxt_Qnumber);
@@ -295,7 +308,12 @@ public class McqVersion1 extends AppCompatActivity {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 String question = dataSnapshot.getValue(String.class);
-                mTxt_quest.setText(question);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mTxt_quest.setText(Html.fromHtml(question, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mTxt_quest.setText(Html.fromHtml(question));
+                }
+
                 //For database only
                 q = question;
             }
@@ -451,11 +469,11 @@ public class McqVersion1 extends AppCompatActivity {
                             answeredQn = mQuestNum - 1;
                             totalPoint++;
 
-                            if (level_offline == 0){
+                            if (level_offline == 0) {
                                 level = levelINCREASE(level);
                                 //For room database use only
                                 level_cards = level;
-                            }else {
+                            } else {
                                 level = levelINCREASE(level_offline);
                                 //For room database use only
                                 level_cards = level;
@@ -477,11 +495,11 @@ public class McqVersion1 extends AppCompatActivity {
                             mTxt_ans.setText(showResult);
                             unAnsweredQN = mQuestNum - 1;
                             eachQuestStatusFAILURE();
-                            if (level_offline == 0){
+                            if (level_offline == 0) {
                                 level = levelDECREASE(level);
                                 //For room database use only
                                 level_cards = level;
-                            }else {
+                            } else {
                                 level = levelDECREASE(level_offline);
                                 //For room database use only
                                 level_cards = level;
@@ -503,11 +521,11 @@ public class McqVersion1 extends AppCompatActivity {
                             unAnsweredQN = mQuestNum - 1;
                             eachQuestStatusFAILURE();
 
-                            if (level_offline == 0){
+                            if (level_offline == 0) {
                                 level = levelDECREASE(level);
                                 //For room database use only
                                 level_cards = level;
-                            }else {
+                            } else {
                                 level = levelDECREASE(level_offline);
                                 //For room database use only
                                 level_cards = level;
@@ -532,7 +550,14 @@ public class McqVersion1 extends AppCompatActivity {
                     @Override
                     public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                         String explanation = dataSnapshot.getValue(String.class);
-                        mTxt_expl.setText(explanation);
+//                        mTxt_expl.setText(explanation);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            mTxt_expl.setText(Html.fromHtml(explanation, Html.FROM_HTML_MODE_COMPACT));
+                        } else {
+                            mTxt_expl.setText(Html.fromHtml(explanation));
+                        }
+
                         //For database only
                         e = explanation;
                         addQuestionDatabase();
@@ -1415,6 +1440,7 @@ public class McqVersion1 extends AppCompatActivity {
         final List<Mcq_Q_entity> readQfromDatabase = BcsPOSoptionRecV.mcq_database.mcq_q_dao().find_quest_option(id);
 
         if (readQfromDatabase.isEmpty()) {
+            countPriLernMast();
             updateQuestion();
         }
 
@@ -1422,9 +1448,15 @@ public class McqVersion1 extends AppCompatActivity {
             for (final Mcq_Q_entity mqe : readQfromDatabase) {
 
                 idEachQuest(child_Name, mPost_key, questionN[mQuestNum - 1]);
+                countPriLernMast();
 
                 String get_q = mqe.getQ();
-                mTxt_quest.setText(get_q);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mTxt_quest.setText(Html.fromHtml(get_q, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mTxt_quest.setText(Html.fromHtml(get_q));
+                }
+//                mTxt_quest.setText(get_q);
                 String get_o1 = mqe.getO1();
                 mChkOpt1.setText(get_o1);
                 String get_o2 = mqe.getO2();
@@ -1433,6 +1465,9 @@ public class McqVersion1 extends AppCompatActivity {
                 mChkOpt3.setText(get_o3);
                 String get_o4 = mqe.getO4();
                 mChkOpt4.setText(get_o4);
+                level_question = mqe.getLevel_question();
+                updateLevelEachQuestionStatus(level_question);
+
 
 
                 totalQuestion = mqe.getTotal_N_Q();
@@ -1495,7 +1530,7 @@ public class McqVersion1 extends AppCompatActivity {
 
                                 //Increase the question number
                                 mQuestNum++;
-                                eachQuestStatus();
+//                                eachQuestStatus();
                                 initialState_offline();
 
                                 uncheckOption();
@@ -1506,14 +1541,15 @@ public class McqVersion1 extends AppCompatActivity {
 
                                     make_int_r_zero();
                                     notificationForTotalPoint();
-                                    eachQuestStatus();
+//                                    eachQuestStatus();
+                                    countPriLernMast();
                                     readFromRoomDatabase();
 
                                     cycle++;
                                     totalPoint = 0;
                                     initialState_offline();
                                 } else {
-
+                                    countPriLernMast();
                                     readFromRoomDatabase();
                                 }
 
@@ -1527,7 +1563,12 @@ public class McqVersion1 extends AppCompatActivity {
                         String get_ans = mqe.getAns();
                         String get_e = mqe.getE();
                         mTxt_ans.setText(get_ans);
-                        mTxt_expl.setText(get_e);
+//                        mTxt_expl.setText(get_e);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            mTxt_expl.setText(Html.fromHtml(get_e, Html.FROM_HTML_MODE_COMPACT));
+                        } else {
+                            mTxt_expl.setText(Html.fromHtml(get_e));
+                        }
 
                         //For Firebase use only
                         ans = get_ans;
@@ -1554,6 +1595,7 @@ public class McqVersion1 extends AppCompatActivity {
 
                             initialState_offline();
                             addQuestionDatabase();
+
 
                         } else if (ansChoice.equals("NoAnswerChoosen")) {
                             initialState_offline();
@@ -1832,7 +1874,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q1":
                 if (r1 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r1 == 1) {
@@ -1842,7 +1884,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q2":
                 if (r2 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r2 == 1) {
@@ -1852,7 +1894,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q3":
                 if (r3 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r3 == 1) {
@@ -1862,7 +1904,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q4":
                 if (r4 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r4 == 1) {
@@ -1872,7 +1914,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q5":
                 if (r5 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r5 == 1) {
@@ -1882,7 +1924,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q6":
                 if (r6 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r6 == 1) {
@@ -1892,7 +1934,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q7":
                 if (r7 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r7 == 1) {
@@ -1902,7 +1944,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q8":
                 if (r8 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r8 == 1) {
@@ -1912,7 +1954,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q9":
                 if (r9 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r9 == 1) {
@@ -1922,7 +1964,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q10":
                 if (r10 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r10 == 1) {
@@ -1932,7 +1974,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q11":
                 if (r11 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r11 == 1) {
@@ -1942,7 +1984,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q12":
                 if (r12 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r12 == 1) {
@@ -1952,7 +1994,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q13":
                 if (r13 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r13 == 1) {
@@ -1962,7 +2004,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q14":
                 if (r14 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r14 == 1) {
@@ -1972,7 +2014,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q15":
                 if (r15 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r15 == 1) {
@@ -1982,7 +2024,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q16":
                 if (r16 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r16 == 1) {
@@ -1992,7 +2034,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q17":
                 if (r17 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r17 == 1) {
@@ -2002,7 +2044,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q18":
                 if (r18 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r18 == 1) {
@@ -2012,7 +2054,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q19":
                 if (r19 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r19 == 1) {
@@ -2022,7 +2064,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q20":
                 if (r20 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r20 == 1) {
@@ -2032,7 +2074,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q21":
                 if (r21 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r21 == 1) {
@@ -2042,7 +2084,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q22":
                 if (r22 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r22 == 1) {
@@ -2052,7 +2094,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q23":
                 if (r23 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r23 == 1) {
@@ -2062,7 +2104,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q24":
                 if (r24 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r24 == 1) {
@@ -2072,7 +2114,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q25":
                 if (r25 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r25 == 1) {
@@ -2082,7 +2124,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q26":
                 if (r26 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r26 == 1) {
@@ -2092,7 +2134,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q27":
                 if (r27 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r27 == 1) {
@@ -2102,7 +2144,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q28":
                 if (r28 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r28 == 1) {
@@ -2112,7 +2154,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q29":
                 if (r29 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r29 == 1) {
@@ -2122,7 +2164,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q30":
                 if (r30 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r30 == 1) {
@@ -2132,7 +2174,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q31":
                 if (r31 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r31 == 1) {
@@ -2142,7 +2184,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q32":
                 if (r32 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r32 == 1) {
@@ -2152,7 +2194,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q33":
                 if (r33 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r33 == 1) {
@@ -2162,7 +2204,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q34":
                 if (r34 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r34 == 1) {
@@ -2172,7 +2214,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q35":
                 if (r35 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r35 == 1) {
@@ -2182,7 +2224,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q36":
                 if (r36 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r36 == 1) {
@@ -2192,7 +2234,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q37":
                 if (r37 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r37 == 1) {
@@ -2202,7 +2244,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q38":
                 if (r38 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r38 == 1) {
@@ -2212,7 +2254,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q39":
                 if (r39 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r39 == 1) {
@@ -2222,7 +2264,7 @@ public class McqVersion1 extends AppCompatActivity {
             case "q40":
                 if (r40 == 0) {
                     totalPoint++;
-                    eachQuestStatusSUCCESS();
+                    eachQuestStatusSUCCESS_OFFLINE();
                     break;
                 }
                 if (r40 == 1) {
@@ -2236,7 +2278,7 @@ public class McqVersion1 extends AppCompatActivity {
         switch (questionN[mQuestNum - 1]) {
             case "q1":
                 if (r1 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r1 == 1) {
@@ -2245,7 +2287,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q2":
                 if (r2 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r2 == 1) {
@@ -2254,7 +2296,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q3":
                 if (r3 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r3 == 1) {
@@ -2263,7 +2305,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q4":
                 if (r4 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r4 == 1) {
@@ -2272,7 +2314,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q5":
                 if (r5 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r5 == 1) {
@@ -2281,7 +2323,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q6":
                 if (r6 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r6 == 1) {
@@ -2290,7 +2332,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q7":
                 if (r7 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r7 == 1) {
@@ -2299,7 +2341,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q8":
                 if (r8 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r8 == 1) {
@@ -2308,7 +2350,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q9":
                 if (r9 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r9 == 1) {
@@ -2317,7 +2359,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q10":
                 if (r10 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r10 == 1) {
@@ -2326,7 +2368,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q11":
                 if (r11 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r11 == 1) {
@@ -2335,7 +2377,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q12":
                 if (r12 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r12 == 1) {
@@ -2344,7 +2386,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q13":
                 if (r13 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r13 == 1) {
@@ -2353,7 +2395,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q14":
                 if (r14 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r14 == 1) {
@@ -2362,7 +2404,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q15":
                 if (r15 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r15 == 1) {
@@ -2371,7 +2413,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q16":
                 if (r16 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r16 == 1) {
@@ -2380,7 +2422,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q17":
                 if (r17 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r17 == 1) {
@@ -2389,7 +2431,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q18":
                 if (r18 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r18 == 1) {
@@ -2398,7 +2440,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q19":
                 if (r19 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r19 == 1) {
@@ -2407,7 +2449,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q20":
                 if (r20 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r20 == 1) {
@@ -2416,7 +2458,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q21":
                 if (r21 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r21 == 1) {
@@ -2425,7 +2467,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q22":
                 if (r22 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r22 == 1) {
@@ -2434,7 +2476,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q23":
                 if (r23 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r23 == 1) {
@@ -2443,7 +2485,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q24":
                 if (r24 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r24 == 1) {
@@ -2452,7 +2494,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q25":
                 if (r25 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r25 == 1) {
@@ -2461,7 +2503,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q26":
                 if (r26 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r26 == 1) {
@@ -2470,7 +2512,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q27":
                 if (r27 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r27 == 1) {
@@ -2479,7 +2521,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q28":
                 if (r28 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r28 == 1) {
@@ -2488,7 +2530,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q29":
                 if (r29 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r29 == 1) {
@@ -2497,7 +2539,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q30":
                 if (r30 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r30 == 1) {
@@ -2506,7 +2548,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q31":
                 if (r31 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r31 == 1) {
@@ -2515,7 +2557,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q32":
                 if (r32 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r32 == 1) {
@@ -2524,7 +2566,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q33":
                 if (r33 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r33 == 1) {
@@ -2533,7 +2575,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q34":
                 if (r34 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r34 == 1) {
@@ -2542,7 +2584,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q35":
                 if (r35 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r35 == 1) {
@@ -2551,7 +2593,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q36":
                 if (r36 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r36 == 1) {
@@ -2560,7 +2602,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q37":
                 if (r37 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r37 == 1) {
@@ -2569,7 +2611,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q38":
                 if (r38 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r38 == 1) {
@@ -2578,7 +2620,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q39":
                 if (r39 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r39 == 1) {
@@ -2587,7 +2629,7 @@ public class McqVersion1 extends AppCompatActivity {
                 break;
             case "q40":
                 if (r40 == 0) {
-                    eachQuestStatusFAILURE();
+                    eachQuestStatusFAILURE_OFFLINE();
                     break;
                 }
                 if (r40 == 1) {
@@ -2639,18 +2681,20 @@ public class McqVersion1 extends AppCompatActivity {
         r39 = 0;
         r40 = 0;
     }
-    public void disableSUBMITnextPREV(){
+
+    public void disableSUBMITnextPREV() {
         mBtn_submit.setEnabled(false);
         btn_next.setEnabled(false);
         btn_prev.setEnabled(false);
     }
+
     public void enableSUBMITnextPREV() {
         mBtn_submit.setEnabled(true);
         btn_next.setEnabled(true);
         btn_prev.setEnabled(true);
     }
 
-    public void progreesBarBackgroundVISIBLE(){
+    public void progreesBarBackgroundVISIBLE() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -2664,7 +2708,7 @@ public class McqVersion1 extends AppCompatActivity {
         }).start();
     }
 
-    public void progressBarBackgroundGONE(){
+    public void progressBarBackgroundGONE() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -2676,5 +2720,318 @@ public class McqVersion1 extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    public void eachQuestStatusSUCCESS_OFFLINE() {
+        level_question = eachQuestStatusINCREASE(level_question);
+        updateLevelEachQuestionStatus(level_question);
+        switch (questionN[answeredQn]) {
+            case "q1":
+                r1 = 1;
+                break;
+            case "q2":
+                r2 = 1;
+                break;
+            case "q3":
+                r3 = 1;
+                break;
+            case "q4":
+                r4 = 1;
+                break;
+            case "q5":
+                r5 = 1;
+                break;
+            case "q6":
+                r6 = 1;
+                break;
+            case "q7":
+                r7 = 1;
+                break;
+            case "q8":
+                r8 = 1;
+                break;
+            case "q9":
+                r9 = 1;
+                break;
+            case "q10":
+                r10 = 1;
+                break;
+            case "q11":
+                r11 = 1;
+                break;
+            case "q12":
+                r12 = 1;
+                break;
+            case "q13":
+                r13 = 1;
+                break;
+            case "q14":
+                r14 = 1;
+                break;
+            case "q15":
+                r15 = 1;
+                break;
+            case "q16":
+                r16 = 1;
+                break;
+            case "q17":
+                r17 = 1;
+                break;
+            case "q18":
+                r18 = 1;
+                break;
+            case "q19":
+                r19 = 1;
+                break;
+            case "q20":
+                r20 = 1;
+                break;
+            case "q21":
+                r21 = 1;
+                break;
+            case "q22":
+                r22 = 1;
+                break;
+            case "q23":
+                r23 = 1;
+                break;
+            case "q24":
+                r24 = 1;
+                break;
+            case "q25":
+                r25 = 1;
+                break;
+            case "q26":
+                r26 = 1;
+                break;
+            case "q27":
+                r27 = 1;
+                break;
+            case "q28":
+                r28 = 1;
+                break;
+            case "q29":
+                r29 = 1;
+                break;
+            case "q30":
+                r30 = 1;
+                break;
+            case "q31":
+                r31 = 1;
+                break;
+            case "q32":
+                r32 = 1;
+                break;
+            case "q33":
+                r33 = 1;
+                break;
+            case "q34":
+                r34 = 1;
+                break;
+            case "q35":
+                r35 = 1;
+                break;
+            case "q36":
+                r36 = 1;
+                break;
+            case "q37":
+                r37 = 1;
+                break;
+            case "q38":
+                r38 = 1;
+                break;
+            case "q39":
+                r39 = 1;
+                break;
+            case "q40":
+                r40 = 1;
+                break;
+            case "q41":
+                q41 = eachQuestStatusINCREASE(q41);
+                updateLevelEachQuestionStatus(q41);
+                break;
+            default:
+                Toast.makeText(McqVersion1.this, "Failure in line 2814", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+    }
+
+    public void eachQuestStatusFAILURE_OFFLINE() {
+        level_question = eachQuestStatusDECREASE(level_question);
+        updateLevelEachQuestionStatus(level_question);
+        check_if_q_is_repeated();
+    }
+
+    public void check_if_q_is_repeated() {
+        switch (questionN[answeredQn]) {
+            case "q1":
+                r1 = 1;
+                break;
+            case "q2":
+                r2 = 1;
+                break;
+            case "q3":
+                r3 = 1;
+                break;
+            case "q4":
+                r4 = 1;
+                break;
+            case "q5":
+                r5 = 1;
+                break;
+            case "q6":
+                r6 = 1;
+                break;
+            case "q7":
+                r7 = 1;
+                break;
+            case "q8":
+                r8 = 1;
+                break;
+            case "q9":
+                r9 = 1;
+                break;
+            case "q10":
+                r10 = 1;
+                break;
+            case "q11":
+                r11 = 1;
+                break;
+            case "q12":
+                r12 = 1;
+                break;
+            case "q13":
+                r13 = 1;
+                break;
+            case "q14":
+                r14 = 1;
+                break;
+            case "q15":
+                r15 = 1;
+                break;
+            case "q16":
+                r16 = 1;
+                break;
+            case "q17":
+                r17 = 1;
+                break;
+            case "q18":
+                r18 = 1;
+                break;
+            case "q19":
+                r19 = 1;
+                break;
+            case "q20":
+                r20 = 1;
+                break;
+            case "q21":
+                r21 = 1;
+                break;
+            case "q22":
+                r22 = 1;
+                break;
+            case "q23":
+                r23 = 1;
+                break;
+            case "q24":
+                r24 = 1;
+                break;
+            case "q25":
+                r25 = 1;
+                break;
+            case "q26":
+                r26 = 1;
+                break;
+            case "q27":
+                r27 = 1;
+                break;
+            case "q28":
+                r28 = 1;
+                break;
+            case "q29":
+                r29 = 1;
+                break;
+            case "q30":
+                r30 = 1;
+                break;
+            case "q31":
+                r31 = 1;
+                break;
+            case "q32":
+                r32 = 1;
+                break;
+            case "q33":
+                r33 = 1;
+                break;
+            case "q34":
+                r34 = 1;
+                break;
+            case "q35":
+                r35 = 1;
+                break;
+            case "q36":
+                r36 = 1;
+                break;
+            case "q37":
+                r37 = 1;
+                break;
+            case "q38":
+                r38 = 1;
+                break;
+            case "q39":
+                r39 = 1;
+                break;
+            case "q40":
+                r40 = 1;
+                break;
+            case "q41":
+                q41 = eachQuestStatusINCREASE(q41);
+                updateLevelEachQuestionStatus(q41);
+                break;
+            default:
+                Toast.makeText(McqVersion1.this, "Failure in line 2814", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    public void countPriLernMast (){
+
+        final String customID = child_Name + "_" + mPost_key + "_"+"%";
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int countPrimary = Mcq_Database.getDatabase(getApplicationContext()).
+                                mcq_q_dao().countPrimaryQuestion(customID);
+                        int countLearning = Mcq_Database.getDatabase(getApplicationContext()).
+                                mcq_q_dao().countLearning(customID);
+                        int countMaster = Mcq_Database.getDatabase(getApplicationContext()).
+                                mcq_q_dao().countMaster(customID);
+//                        int countMaster = totalQ - countPrimary - countLearning;
+                        progressPrimary.setMax(totalQuestion);
+                        progressLearning.setMax(totalQuestion);
+                        progressMaster.setMax(totalQuestion);
+                        progressPrimary.setProgress(countPrimary);
+                        progressLearning.setProgress(countLearning);
+                        progressMaster.setProgress(countMaster);
+
+                        String textPr = "Primary: "+String.valueOf(countPrimary)+" (out of "+String.valueOf(totalQuestion)+")";
+                        String textLr = "Learning: "+String.valueOf(countLearning)+" (out of "+String.valueOf(totalQuestion)+")";
+                        String textMs = "Master: "+String.valueOf(countMaster)+" (out of "+String.valueOf(totalQuestion)+")";
+
+                        mPrimary_Text.setText(textPr);
+                        mLearning_Text.setText(textLr);
+                        mMaster_Text.setText(textMs);
+
+                    }
+                });
+            }
+        }).start();
+
+
     }
 }

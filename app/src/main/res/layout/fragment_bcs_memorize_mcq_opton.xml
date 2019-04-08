@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Idioms_Phrase.Bcs_IP_optionMcq">
+    tools:context=".Bcs_English_Mcq.Bcs_IP_optionMcq">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

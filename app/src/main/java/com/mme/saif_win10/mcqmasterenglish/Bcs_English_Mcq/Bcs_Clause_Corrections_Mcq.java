@@ -1,4 +1,4 @@
-package com.mme.saif_win10.mcqmasterenglish.PartsOFspeech;
+package com.mme.saif_win10.mcqmasterenglish.Bcs_English_Mcq;
 
 
 import android.content.Intent;
@@ -15,21 +15,21 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mme.saif_win10.mcqmasterenglish.Bcs_English_Mcq.BcsPOSoptionMcq;
 import com.mme.saif_win10.mcqmasterenglish.Parameter;
 import com.mme.saif_win10.mcqmasterenglish.R;
-import com.mme.saif_win10.mcqmasterenglish.memorizeROOMdatabase.MemorizeVersion1;
-
+import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion1;
+import com.mme.saif_win10.mcqmasterenglish.mcqROOMdatabase.McqVersion2;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BcsPOSmemorize extends Fragment {
+public class Bcs_Clause_Corrections_Mcq extends Fragment {
     View rootView;
-    private RecyclerView mRecycler_BcsMemorize;
+    private RecyclerView mRecycler_BcsMcq;
     private DatabaseReference mDatabase;
 
-    public BcsPOSmemorize() {
+
+    public Bcs_Clause_Corrections_Mcq() {
         // Required empty public constructor
     }
 
@@ -38,12 +38,13 @@ public class BcsPOSmemorize extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_bcs_option_memorize, container, false);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("bcs_pos_memorize");
+//        rootView = inflater.inflate(R.layout.fragment_bcs_memorize_mcq_opton, container, false);
+        rootView = inflater.inflate(R.layout.fragment_bcs_option_mcq, container, false);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mcq_cls_corr");
         mDatabase.keepSynced(false);
-        mRecycler_BcsMemorize = rootView.findViewById(R.id.mRecycler_BcsMemorize);
-        mRecycler_BcsMemorize.setHasFixedSize(true);
-        mRecycler_BcsMemorize.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecycler_BcsMcq = rootView.findViewById(R.id.mRecycler_BcsMcq);
+        mRecycler_BcsMcq.setHasFixedSize(true);
+        mRecycler_BcsMcq.setLayoutManager(new LinearLayoutManager(getContext()));
         return rootView;
     }
 
@@ -63,9 +64,9 @@ public class BcsPOSmemorize extends Fragment {
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(getActivity(), MemorizeVersion1.class);
+                                Intent intent = new Intent(getActivity(), McqVersion1.class);
                                 intent.putExtra("key_name", post_key);
-                                intent.putExtra("childName", "bcs_pos_memorize");
+                                intent.putExtra("childName", "mcq_cls_corr");
                                 Toast.makeText(getContext(), "Please make sure you turn off the rotation of your device", Toast.LENGTH_LONG).show();
                                 startActivity(intent);
                             }
@@ -73,7 +74,7 @@ public class BcsPOSmemorize extends Fragment {
 
                     }
                 };
-        mRecycler_BcsMemorize.setAdapter(firebaseRecyclerAdapter);
+        mRecycler_BcsMcq.setAdapter(firebaseRecyclerAdapter);
     }
 
     public static class ParameterViewHolder extends RecyclerView.ViewHolder
@@ -105,4 +106,5 @@ public class BcsPOSmemorize extends Fragment {
             post_total.setText(total);
         }
     }
+
 }

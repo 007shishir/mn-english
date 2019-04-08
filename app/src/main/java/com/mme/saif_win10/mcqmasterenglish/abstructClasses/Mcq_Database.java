@@ -26,6 +26,7 @@ public abstract class Mcq_Database extends RoomDatabase {
                             // Wipes and rebuilds instead of migrating
                             // if no Migration object.
                             // Migration is not part of this practical.
+                            .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
                             .build();
                 }

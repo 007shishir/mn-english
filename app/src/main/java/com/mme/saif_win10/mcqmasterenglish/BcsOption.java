@@ -9,8 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.mme.saif_win10.mcqmasterenglish.Idioms_Phrase.Bcs_IP_optionMcq;
-import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.BcsPOSoptionMcq;
+import com.mme.saif_win10.mcqmasterenglish.Bcs_English_Mcq.Bcs_Clause_Corrections_Mcq;
+import com.mme.saif_win10.mcqmasterenglish.Bcs_English_Mcq.Bcs_IP_optionMcq;
+import com.mme.saif_win10.mcqmasterenglish.Bcs_English_Mcq.BcsPOSoptionMcq;
 
 
 /**
@@ -19,7 +20,7 @@ import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.BcsPOSoptionMcq;
 public class BcsOption extends Fragment {
     View view;
     Button mBcs_Pos;
-    Button getmBcs_IP;
+    Button getmBcs_IP, mBcs_CCr, mBcs_STr;
 
 
     public BcsOption() {
@@ -34,6 +35,8 @@ public class BcsOption extends Fragment {
         view = inflater.inflate(R.layout.fragment_bcs_option, container, false);
         mBcs_Pos =  view.findViewById(R.id.mBcs_Pos);
         getmBcs_IP = view.findViewById(R.id.mBcs_IP);
+        mBcs_CCr = view.findViewById(R.id.mBcs_CCr);
+        mBcs_STr = view.findViewById(R.id.mBcs_STr);
 
         mBcs_Pos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +56,15 @@ public class BcsOption extends Fragment {
                 fr.addToBackStack(null).commit();
 //                Intent intent = new Intent(getActivity(), Bcs_IP_optionRecV.class);
 //                startActivity(intent);
+            }
+        });
+
+        mBcs_CCr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                fr.replace(R.id.mFL_bcsOR, new Bcs_Clause_Corrections_Mcq());
+                fr.addToBackStack(null).commit();
             }
         });
 

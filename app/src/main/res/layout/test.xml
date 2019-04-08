@@ -13,164 +13,235 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/background_color_one"
+            android:gravity="center"
             android:orientation="vertical">
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/textView36"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/memorize_lower_left"-->
+            <!--android:gravity="center"-->
+            <!--android:text="TextView" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/textView35"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/memorize_lower_right"-->
+            <!--android:gravity="center"-->
+            <!--android:text="TextView" />-->
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:background="@drawable/side_nav_bar"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/mcq_topic_background"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="TextView" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView10"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="44dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:text="English Language and Literature"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/mcq_id_background"
-                        android:gravity="center"
-                        android:text="TextView" />
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="200dp"
+                    android:layout_height="38dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bcs_total_marks"
+                    android:gravity="center"
+                    android:text="Total Marks : 35"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-                    <TextView
-                        android:id="@+id/textView21"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/mcq_question_status_background"
-                        android:gravity="center"
-                        android:text="TextView" />
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_margin="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/mark_distribution"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingEnd="30dp"
-                android:paddingStart="30dp"
-                android:paddingTop="30dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView27"
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bcs_language_btn"
+                    android:text="Language"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/button11"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/memorize_question_status_backg"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView29"
+                    <Button
+                        android:id="@+id/mBcs_Pos2"
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bcs_btn_option_d"
+                        android:text="Parts of Speech"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button9" />
+
+                    <Button
+                        android:id="@+id/mBcs_IP2"
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bcs_btn_option_d"
+                        android:text="Idioms &amp; Phrases"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mBcs_Pos" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/memorize_question_backg"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView30"
+                    <Button
+                        android:id="@+id/mBcs_CCr"
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bcs_btn_option_d"
+                        android:text="Clauses &amp; Corrections"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button9" />
+
+                    <Button
+                        android:id="@+id/mBcs_STr"
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bcs_btn_option_d"
+                        android:text="Sentences &amp; Transformations"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mBcs_Pos" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/memorize_i_know"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView28"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/memorize_i_do_not_know"
-                    android:gravity="center"
-                    android:text="TextView" />
+                    <Button
+                        android:id="@+id/mBcs_Word"
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bcs_btn_option_d"
+                        android:text="Words"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button9" />
 
+                    <Button
+                        android:id="@+id/mBcs_Composition"
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bcs_btn_option_d"
+                        android:text="Composition"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mBcs_Pos" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:background="@drawable/memorize_lower_background"
-                android:orientation="vertical"
-                android:paddingBottom="0dp"
-                android:paddingEnd="0dp"
-                android:paddingStart="0dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/textView32"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/memorize_i_do_not_know"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView31"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="TextView" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/adView8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
-            </LinearLayout>
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/textView36"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/memorize_lower_left"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="TextView" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/textView35"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/memorize_lower_right"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="TextView" />-->
-            <!--</LinearLayout>-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <com.google.android.gms.ads.AdView
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -180,36 +251,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <com.google.android.gms.ads.AdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <com.google.android.gms.ads.AdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:layout_weight="1"
                     ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-                    android:id="@+id/adView11"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
             </LinearLayout>
 
         </LinearLayout>

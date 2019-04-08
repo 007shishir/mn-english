@@ -235,6 +235,71 @@
                     android:textColor="@color/common_google_signin_btn_text_dark_focused" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mPrimary_Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Primary Status"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressPrimary"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:progressBackgroundTint="@color/colorPrimaryDark"
+                        android:progressTint="@android:color/holo_red_dark" />
+
+                    <TextView
+                        android:id="@+id/mLearning_Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Learning Status"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressLearning"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:indeterminate="false"
+                        android:progressBackgroundTint="@color/colorPrimaryDark"
+                        android:progressTint="@android:color/holo_orange_light" />
+
+                    <TextView
+                        android:id="@+id/mMaster_Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Master Status"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressMaster"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:progressBackgroundTint="@color/colorPrimaryDark"
+                        android:progressTint="@android:color/holo_green_dark" />
+                </LinearLayout>
+            </LinearLayout>
+
             <com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adView"

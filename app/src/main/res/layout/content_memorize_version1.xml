@@ -113,7 +113,7 @@
                     android:id="@+id/mTxt_Submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/memorize_i_do_not_know"
+                    android:background="@drawable/memorize_see_answer"
                     android:gravity="center"
                     android:text="Tap to see the answer!"
                     android:textAlignment="center"
