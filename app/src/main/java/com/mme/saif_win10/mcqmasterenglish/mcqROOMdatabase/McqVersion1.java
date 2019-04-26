@@ -330,7 +330,11 @@ public class McqVersion1 extends AppCompatActivity {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 String option1 = dataSnapshot.getValue(String.class);
-                mChkOpt1.setText(option1);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt1.setText(Html.fromHtml(option1, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt1.setText(Html.fromHtml(option1));
+                }
                 //For Database only
                 o1 = option1;
             }
@@ -347,7 +351,12 @@ public class McqVersion1 extends AppCompatActivity {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 String option2 = dataSnapshot.getValue(String.class);
-                mChkOpt2.setText(option2);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt2.setText(Html.fromHtml(option2, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt2.setText(Html.fromHtml(option2));
+                }
+
                 //For database only
                 o2 = option2;
             }
@@ -364,7 +373,11 @@ public class McqVersion1 extends AppCompatActivity {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 String option3 = dataSnapshot.getValue(String.class);
-                mChkOpt3.setText(option3);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt3.setText(Html.fromHtml(option3, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt3.setText(Html.fromHtml(option3));
+                }
                 //For database only
                 o3 = option3;
             }
@@ -381,7 +394,12 @@ public class McqVersion1 extends AppCompatActivity {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 String option4 = dataSnapshot.getValue(String.class);
-                mChkOpt4.setText(option4);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt4.setText(Html.fromHtml(option4, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt4.setText(Html.fromHtml(option4));
+                }
+
                 //For database only
                 o4 = option4;
 //                progressBar2.setVisibility(View.GONE);
@@ -1450,21 +1468,41 @@ public class McqVersion1 extends AppCompatActivity {
                 idEachQuest(child_Name, mPost_key, questionN[mQuestNum - 1]);
                 countPriLernMast();
 
+                //Printing question
                 String get_q = mqe.getQ();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     mTxt_quest.setText(Html.fromHtml(get_q, Html.FROM_HTML_MODE_COMPACT));
                 } else {
                     mTxt_quest.setText(Html.fromHtml(get_q));
                 }
-//                mTxt_quest.setText(get_q);
+                //Printing Question
                 String get_o1 = mqe.getO1();
-                mChkOpt1.setText(get_o1);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt1.setText(Html.fromHtml(get_o1, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt1.setText(Html.fromHtml(get_o1));
+                }
+                //Printing Option One
                 String get_o2 = mqe.getO2();
-                mChkOpt2.setText(get_o2);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt2.setText(Html.fromHtml(get_o2, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt2.setText(Html.fromHtml(get_o2));
+                }
+                //Printing Option Two
                 String get_o3 = mqe.getO3();
-                mChkOpt3.setText(get_o3);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt3.setText(Html.fromHtml(get_o3, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt3.setText(Html.fromHtml(get_o3));
+                }
+                //Printing Option Four
                 String get_o4 = mqe.getO4();
-                mChkOpt4.setText(get_o4);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mChkOpt4.setText(Html.fromHtml(get_o4, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mChkOpt4.setText(Html.fromHtml(get_o4));
+                }
                 level_question = mqe.getLevel_question();
                 updateLevelEachQuestionStatus(level_question);
 

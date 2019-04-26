@@ -146,7 +146,6 @@ public class MemorizeVersion1 extends AppCompatActivity {
                 level_question = mre.getLevel_question();
                 eachQuestStatus_DB();
                 if (getQuestion == null) {
-//                    Toast.makeText(getApplicationContext(), "100: "+getQuestion, Toast.LENGTH_LONG).show();
                     getQuestion_Explanation();
                     if (question==null){
                         getQuestion_Explanation();
@@ -158,19 +157,17 @@ public class MemorizeVersion1 extends AppCompatActivity {
                     getE1 = mre.getE();
                     getE2 = mre.getEe();
                 }
-                mTxt_quest.setText(getQuestion);
-//                Toast.makeText(getApplicationContext(), "101: "+getQuestion, Toast.LENGTH_LONG).show();
-
+//                mTxt_quest.setText(getQuestion);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mTxt_quest.setText(Html.fromHtml(getQuestion, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mTxt_quest.setText(Html.fromHtml(getQuestion));
+                }
                 totalQ = mre.getTotal_N_Q();
-//                Toast.makeText(getApplicationContext(), "totalQ= " + String.valueOf(totalQ), Toast.LENGTH_SHORT).show();
                 if (totalQ < 1) {
                     totalQ = 1;
                     Toast.makeText(getApplicationContext(), "find out why totalQ is less than one", Toast.LENGTH_SHORT).show();
                 }
-//                else {
-////                    totalQ = 40;
-//                    Toast.makeText(getApplicationContext(), "totalQ= " + String.valueOf(totalQ), Toast.LENGTH_SHORT).show();
-//                }
 
                 String special_id = child_Name + "_" + mPost_key + "_" + questionN[totalQ - 1];
                 final List<Memorize_entity> read_level_fromDatabase = Memorize_database.getINSTANCE(getApplicationContext()).
@@ -193,7 +190,6 @@ public class MemorizeVersion1 extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         clicked = false;
-
                         mTxt_known.setVisibility(View.GONE);
                         mTxt_unknown.setVisibility(View.GONE);
                         answeredQn = mQuestNum - 1;
@@ -272,8 +268,12 @@ public class MemorizeVersion1 extends AppCompatActivity {
 
 
                         if (clicked) {
-
-                            mTxt_E1.setText(getE1);
+//                            mTxt_E1.setText(getE1);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                mTxt_E1.setText(Html.fromHtml(getE1, Html.FROM_HTML_MODE_COMPACT));
+                            } else {
+                                mTxt_E1.setText(Html.fromHtml(getE1));
+                            }
 //                            mTxt_E2.setText(getE2);
                             if (getE2.contains(":")){
                                 String[] separated_getE2 = getE2.split(":");
@@ -2128,10 +2128,13 @@ public class MemorizeVersion1 extends AppCompatActivity {
                 if (question == null|| question.equals("")) {
                     Toast.makeText(getApplicationContext(), "No Question Received From Database", Toast.LENGTH_LONG).show();
                 }
-//                else {
-//                    Toast.makeText(getApplicationContext(), "103: "+question, Toast.LENGTH_LONG).show();
-//                }
-                mTxt_quest.setText(question);
+//                mTxt_quest.setText(question);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mTxt_quest.setText(Html.fromHtml(question, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    mTxt_quest.setText(Html.fromHtml(question));
+                }
+
             }
 
             @Override
@@ -2250,8 +2253,18 @@ public class MemorizeVersion1 extends AppCompatActivity {
 
                 if (clicked) {
 
-                    mTxt_E1.setText(e1);
-                    mTxt_E2.setText(e2);
+//                    mTxt_E1.setText(e1);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        mTxt_E1.setText(Html.fromHtml(e1, Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        mTxt_E1.setText(Html.fromHtml(e1));
+                    }
+//                    mTxt_E2.setText(e2);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        mTxt_E2.setText(Html.fromHtml(e2, Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        mTxt_E2.setText(Html.fromHtml(e2));
+                    }
                 }
 
                 eachQuestStatus();
