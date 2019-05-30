@@ -29,9 +29,14 @@
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/mcq_question_background"
+                android:background="@drawable/side_nav_bar"
                 android:gravity="center"
-                android:text="TextView" />
+                android:padding="15dp"
+                android:text="Theoretical Part"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,7 +45,7 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardView5"
+                    android:id="@+id/mCard_Noun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -79,13 +84,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="part one"
-                            android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                            android:text="details" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardView3"
+                    android:id="@+id/mCard_Determiner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -113,19 +117,21 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Determiner"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView22"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="theory" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardView"
+                    android:id="@+id/mCard_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -153,14 +159,16 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Gender"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView19"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="details" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
@@ -172,7 +180,7 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/mPos_n111"
+                    android:id="@+id/mCard_Number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -203,14 +211,16 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Number"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView225405"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="details" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 

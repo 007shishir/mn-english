@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mme.saif_win10.mcqmasterenglish.BcsOption;
+import com.mme.saif_win10.mcqmasterenglish.MemorizeOption;
 import com.mme.saif_win10.mcqmasterenglish.PartsOFspeech.resourceFragment.PosNoun;
 import com.mme.saif_win10.mcqmasterenglish.R;
 import com.mme.saif_win10.mcqmasterenglish.abstructClasses.Mcq_Database;
@@ -31,7 +32,7 @@ public class BcsPOSoptionRecV extends AppCompatActivity {
                     return true;
                 case R.id.navigation_memorize:
                     getSupportFragmentManager().beginTransaction().replace(R.id.mFL_bcsOR,
-                            new BcsPOSmemorize()).commit();
+                            new MemorizeOption()).commit();
                     return true;
                 case R.id.navigation_resource:
 //                     before adding any fragments to details_screen just checking if already fragment is presented then popping it and then will add the new fragment.
