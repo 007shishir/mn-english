@@ -94,14 +94,14 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/mTxt_cls_corr"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/tutorial_button_design"
                     android:gravity="center"
-                    android:text="Clauses"
+                    android:text="Clauses &amp; Correction"
                     android:textAlignment="center"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="20dp"

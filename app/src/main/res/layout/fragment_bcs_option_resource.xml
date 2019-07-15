@@ -225,7 +225,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardView25431"
+                    android:id="@+id/mCard_Pronoun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -253,7 +253,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Pronoun"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/text528View225"
@@ -265,7 +267,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardVi545ew54111"
+                    android:id="@+id/mCard_verb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -293,7 +295,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="verb"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/te48488xtView194"
@@ -326,7 +330,7 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/car65659dView5"
+                    android:id="@+id/mCard_verb2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -355,7 +359,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="phrasal Verb"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/t7978extView25"
@@ -367,7 +373,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/car8855dView3"
+                    android:id="@+id/mCard_verb3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -395,7 +401,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Modal Auxiliaries"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/te548xtView22"
@@ -407,7 +415,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/card98754View"
+                    android:id="@+id/mCard_adjective"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -435,7 +443,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Adjective"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/te25454xtView19"
@@ -454,7 +464,7 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/mPos_noun1"
+                    android:id="@+id/mCard_adverb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -485,7 +495,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Adverb"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView205"
@@ -497,7 +509,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardView31"
+                    android:id="@+id/mCard_prepos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -525,7 +537,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Preposition"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView225"
@@ -537,7 +551,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardView111"
+                    android:id="@+id/mCard_prepos2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -565,14 +579,16 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/middle_text_box"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="Preposition"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView194"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="TextView" />
+                            android:text="part 2" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
@@ -584,6 +600,576 @@
 
                 <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_con_inter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginStart="5dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="261dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_09"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/txtAdv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Conjunction"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtAdvbtm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Interjection" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_phrase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="141dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/txtPrp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Phrase &amp;"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/TxtPrepBtm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Idioms" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_phrase2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/txtPrp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Phrase &amp;"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtPrepBtm2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Idiom2" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_Clauses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginStart="5dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="261dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/txtClauses2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Clauses"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtClauses2btm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="part1" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_Clauses2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="141dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_13"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/txtClause2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Clauses"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/TxtClausesBtm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Part2" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_Tense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/txtTense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Tense"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtTenseBtm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Correction" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_verbCorr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginStart="5dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="261dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ima55geView10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/textV64w26"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Verb"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/t7978extView2500"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Correction" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_perpCorr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="141dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ima981geView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/text455iew23"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Perposition"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/te54View22"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="correction" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_artGenNumCorr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/im545geView9"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/textVi5w20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Article Gender"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/te254ew19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Numer Corr" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_subVerbAgreement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginStart="5dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="261dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageVie1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/tew255"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Sub-Verb"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textVie5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="agreement" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCard_e1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="141dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imag2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/textVi3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Extra"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/teew225"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="TextView" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mCarpos2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageVie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/top_text_box" />
+
+                        <TextView
+                            android:id="@+id/teiew202"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/middle_text_box"
+                            android:gravity="center"
+                            android:text="Extra"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textVi4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="part 2" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#093c4e">
 
     <ScrollView
         android:id="@+id/scrollView4"
@@ -160,14 +161,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <com.google.android.gms.ads.AdView
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
                     ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
             </LinearLayout>
 
@@ -187,7 +187,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Primary Status"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textColor="@android:color/background_light"
                         android:textStyle="bold" />
 
                     <ProgressBar
@@ -204,7 +204,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Learning Status"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textColor="@android:color/background_light"
                         android:textStyle="bold" />
 
                     <ProgressBar
@@ -222,7 +222,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Master Status"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textColor="@android:color/background_light"
                         android:textStyle="bold" />
 
                     <ProgressBar
@@ -241,14 +241,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <com.google.android.gms.ads.AdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
             </LinearLayout>
 
             <LinearLayout
@@ -256,14 +255,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <com.google.android.gms.ads.AdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
             </LinearLayout>
 
             <LinearLayout
@@ -271,14 +269,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <com.google.android.gms.ads.AdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView11"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
             </LinearLayout>
 
         </LinearLayout>
