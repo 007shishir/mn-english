@@ -147,7 +147,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
                 eachQuestStatus_DB();
                 if (getQuestion == null) {
                     getQuestion_Explanation();
-                    if (question==null){
+                    if (question == null) {
                         getQuestion_Explanation();
                         getQuestion = question;
                         getE1 = e1;
@@ -275,17 +275,11 @@ public class MemorizeVersion1 extends AppCompatActivity {
                                 mTxt_E1.setText(Html.fromHtml(getE1));
                             }
 //                            mTxt_E2.setText(getE2);
-                            if (getE2.contains(":")){
-                                String[] separated_getE2 = getE2.split(":");
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    mTxt_E2.setText(Html.fromHtml("<p>"+separated_getE2[0]+"</p><br/><p>"+separated_getE2[1]+"</p>", Html.FROM_HTML_MODE_COMPACT));
-                                } else {
-                                    mTxt_E2.setText(Html.fromHtml("<p>"+separated_getE2[0]+"</p><br/><p>"+separated_getE2[1]+"</p>"));
-                                }
-                            }else {
-                                mTxt_E2.setText(getE2);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                mTxt_E2.setText(Html.fromHtml(getE2, Html.FROM_HTML_MODE_COMPACT));
+                            } else {
+                                mTxt_E2.setText(Html.fromHtml(getE2));
                             }
-
                         }
 
                         eachQuestStatus_DB();
@@ -310,7 +304,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
         viewModel.addMemorizeQ(memorize_entity);
     }
 
-    public void addToDatabaseOFFLINE(){
+    public void addToDatabaseOFFLINE() {
         id = child_Name + "_" + mPost_key + "_" + questionN[mQuestNum - 1];
 //        Toast.makeText(getApplicationContext(), questionN[mQuestNum - 1], Toast.LENGTH_SHORT).show();
         Memorize_entity memorize_entity = new Memorize_entity();
@@ -330,10 +324,10 @@ public class MemorizeVersion1 extends AppCompatActivity {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 question = dataSnapshot.getValue(String.class);
-                if (question == null|| question.equals("")) {
+                if (question == null || question.equals("")) {
                     Toast.makeText(getApplicationContext(), "No Question Received From Database", Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(getApplicationContext(), "103: "+question, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "103: " + question, Toast.LENGTH_LONG).show();
                 }
                 mTxt_quest.setText(question);
                 //For database only
@@ -2084,7 +2078,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
 //        readFromDatabase();
 //    }
 
-    public void updateQuestion(){
+    public void updateQuestion() {
         id = child_Name + "_" + mPost_key + "_" + questionN[mQuestNum - 1];
         countPriLernMast();
         eachQuestStatus();
@@ -2125,7 +2119,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
                 question = dataSnapshot.getValue(String.class);
-                if (question == null|| question.equals("")) {
+                if (question == null || question.equals("")) {
                     Toast.makeText(getApplicationContext(), "No Question Received From Database", Toast.LENGTH_LONG).show();
                 }
 //                mTxt_quest.setText(question);
@@ -2273,7 +2267,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
 
     }
 
-    public void progreesBarBackgroundVISIBLE(){
+    public void progreesBarBackgroundVISIBLE() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -2287,7 +2281,7 @@ public class MemorizeVersion1 extends AppCompatActivity {
         }).start();
     }
 
-    public void progressBarBackgroundGONE(){
+    public void progressBarBackgroundGONE() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -3698,9 +3692,9 @@ public class MemorizeVersion1 extends AppCompatActivity {
         updateLevelEachQuestionStatus(level_question);
     }
 
-    public void countPriLernMast (){
+    public void countPriLernMast() {
 
-        final String customID = child_Name + "_" + mPost_key + "_"+"%";
+        final String customID = child_Name + "_" + mPost_key + "_" + "%";
 
         new Thread(new Runnable() {
             @Override
@@ -3722,9 +3716,9 @@ public class MemorizeVersion1 extends AppCompatActivity {
                         progressLearning.setProgress(countLearning);
                         progressMaster.setProgress(countMaster);
 
-                        String textPr = "Primary: "+String.valueOf(countPrimary)+" (out of "+String.valueOf(totalQ)+")";
-                        String textLr = "Learning: "+String.valueOf(countLearning)+" (out of "+String.valueOf(totalQ)+")";
-                        String textMs = "Master: "+String.valueOf(countMaster)+" (out of "+String.valueOf(totalQ)+")";
+                        String textPr = "Primary: " + String.valueOf(countPrimary) + " (out of " + String.valueOf(totalQ) + ")";
+                        String textLr = "Learning: " + String.valueOf(countLearning) + " (out of " + String.valueOf(totalQ) + ")";
+                        String textMs = "Master: " + String.valueOf(countMaster) + " (out of " + String.valueOf(totalQ) + ")";
 
                         mPrimary_Text.setText(textPr);
                         mLearning_Text.setText(textLr);
